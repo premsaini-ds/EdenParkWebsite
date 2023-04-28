@@ -1,0 +1,17 @@
+{"$id": "site-entity",
+"filter": {
+    "entityIds": ["allglobaldata"]
+},
+"source": "knowledgeGraph",
+"fields": [
+            "c_headers",
+            "c_locatorPageHeading",
+            "c_footerLogo",
+            "c_footerBottomContent",
+            "c_copyrightText"
+],
+"localization": {
+  "locales": ["en"],
+  "primary": false
+}
+}
