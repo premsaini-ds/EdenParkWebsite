@@ -11,8 +11,9 @@ type navbar = {
 };
 
 const Navbar = (props: navbar) => {
+
   return (
-    <div className="container-full-width">
+    <div className="container-full-width HeaderMenu">
       <div className="" style={{ marginTop: "1.50rem" }}>
         <ul className={props.addClass ? "nav opened" : "nav"}>
           {props.navItem?.map((item: any) => {
@@ -20,11 +21,11 @@ const Navbar = (props: navbar) => {
               <>
                 <li>
                   <Link
-                    href={item.url}
+                    href={item.link}
                     rel="noopener noreferrer"
                     eventName={`HeaderItem`}
                   >
-                    {item.lable}
+                    {item.label}
                   </Link>
                 </li>
               </>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Navbar from "./Navbar";
 // import logoUpdated from "../../images/logo_diptyque.png";
 // import locationMarker from "../../images/location-marker.png";
 // import Info from "../../images/info.png";
@@ -26,7 +27,7 @@ type header = {
 
 const Header = (props: header) => {
 
-  console.log("ihhhhhhhh",props);
+  console.log("ihhhhhhhh",props?.header?.headerMenuLinks); 
   // const [isStickyHeader, setIsStickyHeader] = React.useState(false);
   // let [language, setlanguage] = React.useState("");
   // let [country, setCountry] = React.useState("");
@@ -61,11 +62,15 @@ const Header = (props: header) => {
                   height="200"
                   alt="logo"
                   src={
-                    props.header.headerLogo?.url}
+                        props?.header?.headerLogo?.url
+                      }
                 />
              
             </div>
-            {/* Site Logo */}
+            {/* <div dangerouslySetInnerHTML={{ __html: props?.header?.headerMenuLinks[0] }} /> */}
+            
+            <Navbar navItem={props?.header?.headerMenuLinks} path={undefined} template={undefined} alternateSlug={undefined} lastLocale={undefined} addClass={undefined}/>
+                        {/* Site Logo */}
           </div>
         </div>
       </header>

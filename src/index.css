@@ -1376,10 +1376,10 @@ h3.store-heading .store-count {
   @apply text-base font-light uppercase bg-black text-white hover:font-normal;
 }
 
-.scrollbar-container .ps--active-x > .ps__rail-x,
+/* .scrollbar-container .ps--active-x > .ps__rail-x,
 .ps--active-y > .ps__rail-y {
   @apply !hidden;
-}
+} */
 
 .pac-container {
   @apply shadow-none border border-borderGray border-t-0 z-[1];
@@ -4800,4 +4800,20 @@ body.nav-opened
   text-align: center;
   padding: 0 0.166667em;
   font-weight: 600;
+}
+
+.ps__rail-y{
+  opacity: 1 !important;
+}
+
+
+.ps__thumb-y{
+  right: 10px !important;
+  width: 4px !important;
+}
+
+.container-full-width.HeaderMenu ul.nav li a.Link {
+  color: black;
+  font-weight: 500;
+  font-size: 18px;
 }

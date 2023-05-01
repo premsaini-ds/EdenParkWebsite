@@ -204,8 +204,6 @@ const locatorSearch: Template<TemplateRenderProps> = ({
   const { i18n } = useTranslation();
   // i18n.changeLanguage(meta.locale);
   let header: any = "";
-
- 
   header = document._site && document._site.c_headers;
 
 console.log(header,"iamhere");

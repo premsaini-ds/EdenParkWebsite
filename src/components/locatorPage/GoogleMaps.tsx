@@ -229,36 +229,36 @@ export function GoogleMaps(props: any) {
       },
     });
 
-    google.maps.event.addListener(mapMarkerClusterer, 'click', function () {
+    // google.maps.event.addListener(mapMarkerClusterer, 'click', function () {
 
-      consoleLog('CLICK ON CLUSTER');
+    //   consoleLog('CLICK ON CLUSTER');
 
-      setTimeout(() => {
-        const visibilityDetails = getMapRadiusVisibalPart(map);
-        if (visibilityDetails.latitude && visibilityDetails.longitude && visibilityDetails.proximitymeter) {
-          const locationFilter: SelectableFilter = {
-            selected: true,
-            fieldId: "builtin.location",
-            value: {
-              lat: visibilityDetails.latitude,
-              lng: visibilityDetails.longitude,
-              radius: visibilityDetails.proximitymeter,
-            },
-            matcher: Matcher.Near,
-          };
+    //   setTimeout(() => {
+    //     const visibilityDetails = getMapRadiusVisibalPart(map);
+    //     if (visibilityDetails.latitude && visibilityDetails.longitude && visibilityDetails.proximitymeter) {
+    //       const locationFilter: SelectableFilter = {
+    //         selected: true,
+    //         fieldId: "builtin.location",
+    //         value: {
+    //           lat: visibilityDetails.latitude,
+    //           lng: visibilityDetails.longitude,
+    //           radius: visibilityDetails.proximitymeter,
+    //         },
+    //         matcher: Matcher.Near,
+    //       };
 
-          searchActions.setOffset(0)
-          searchActions.setStaticFilters([locationFilter]);
-          searchActions.executeVerticalQuery();
-        }
-      }, 500);
+    //       searchActions.setOffset(0)
+    //       searchActions.setStaticFilters([locationFilter]);
+    //       // searchActions.executeVerticalQuery();
+    //     }
+    //   });
 
-      let zoomValue = map?.getZoom()
-      // if (zoomValue && zoomValue < 10) {
-      //   map?.setZoom(12)
-      // }
-      console.log(zoomValue, "zoomValue")
-    });
+    //   let zoomValue = map?.getZoom()
+    //   if (zoomValue && zoomValue < 10) {
+    //     map?.setZoom(12)
+    //   }
+    //   console.log(zoomValue, "zoomValue")
+    // });
   }
 
 
