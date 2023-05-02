@@ -1,145 +1,6 @@
 import * as React from "react";
-import { defaultTimeZone } from "../../types/constants";
-import { useTranslation } from "react-i18next";
-
 const openClose = {
-  // formatOpenNowString: (hoursData: any, timeZone: any, t: any, _site: any) => {
-  //   if (!timeZone) {
-  //     timeZone = defaultTimeZone;
-  //   }
-  //   const now = new Date();
-  //   let currentTime = new Date(
-  //     now.toLocaleString("en-US", { timeZone: timeZone })
-  //   );
-  //   const tomorrow = new Date(currentTime.getTime() + 60 * 60 * 24 * 1000);
-  //   const yesterday = new Date(currentTime.getTime() - 60 * 60 * 24 * 1000);
-  //   const nowTimeNumber =
-  //     currentTime.getHours() + currentTime.getMinutes() / 60;
-  //   const intervalsToday = openClose.getIntervalOnDate(currentTime, hoursData);
-  //   const intervalsTomorrow = openClose.getIntervalOnDate(tomorrow, hoursData);
-  //   const intervalsYesterday = openClose.getIntervalOnDate(
-  //     yesterday,
-  //     hoursData
-  //   );
-  //   let openRightNow = false;
-  //   let currentInterval = null;
-  //   let nextInterval = null;
-
-  //   if (intervalsYesterday) {
-  //     for (let i = 0; i < intervalsYesterday.length; i++) {
-  //       const interval = intervalsYesterday[i];
-  //       const startIntervalNumber = openClose.timeStringToNumber(
-  //         interval.start
-  //       );
-  //       const endIntervalNumber = openClose.timeStringToNumber(interval.end);
-
-  //       // If end overflows to the next day (i.e. today).
-  //       if (endIntervalNumber < startIntervalNumber) {
-  //         if (nowTimeNumber < endIntervalNumber) {
-  //           currentInterval = interval;
-  //           openRightNow = true;
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   // Assumes no overlapping intervals
-  //   if (intervalsToday) {
-  //     for (let i = 0; i < intervalsToday.length; i++) {
-  //       const interval = intervalsToday[i];
-  //       const startIntervalNumber = openClose.timeStringToNumber(
-  //         interval.start
-  //       );
-  //       const endIntervalNumber = openClose.timeStringToNumber(interval.end);
-
-  //       // If current time doesn't belong to one of yesterdays interval.
-  //       if (currentInterval == null) {
-  //         if (endIntervalNumber < startIntervalNumber) {
-  //           if (nowTimeNumber >= startIntervalNumber) {
-  //             currentInterval = interval;
-  //             openRightNow = true;
-  //           }
-  //         } else if (
-  //           nowTimeNumber >= startIntervalNumber &&
-  //           nowTimeNumber < endIntervalNumber
-  //         ) {
-  //           currentInterval = interval;
-  //           openRightNow = true;
-  //         }
-  //       }
-
-  //       if (nextInterval == null) {
-  //         if (startIntervalNumber > nowTimeNumber) {
-  //           nextInterval = interval;
-  //         }
-  //       } else {
-  //         if (
-  //           startIntervalNumber > nowTimeNumber &&
-  //           startIntervalNumber <
-  //           openClose.timeStringToNumber(nextInterval.start)
-  //         ) {
-  //           nextInterval = interval;
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   let nextIsTomorrow = false;
-
-  //   // If no more intervals in the day
-  //   if (nextInterval == null) {
-  //     if (intervalsTomorrow) {
-  //       if (intervalsTomorrow.length > 0) {
-  //         nextInterval = intervalsTomorrow[0];
-  //         nextIsTomorrow = true;
-  //       }
-  //     }
-  //   }
-
-  //   let hoursString = `<strong><span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span></strong>`;
-  //   if (openRightNow) {
-  //     if (
-  //       currentInterval.start === "00:00" &&
-  //       currentInterval.end === "23:59"
-  //     ) {
-  //       hoursString = _site.c_open24Hours ? _site.c_open24Hours : t("Open 24 Hours");
-  //     } else {
-  //       hoursString = `<strong><span>${_site.c_open ? _site.c_open : t("OPEN")}</span></strong> - ${_site.c_closesAt ? _site.c_closesAt : t("CLOSES AT")} [closingTime]`;
-
-  //       hoursString = hoursString.replace(
-  //         "[closingTime]",
-  //         openClose.formatTime(currentInterval.end)
-  //       );
-  //     }
-  //   } else if (nextInterval) {
-  //     if (nextIsTomorrow) {
-  //       hoursString = `<strong><span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span></strong> - ${_site.c_opensAt ? _site.c_opensAt : t(
-  //         "OPENS AT"
-  //       )} [openingTime] `;
-  //       // hoursString = `<strong><span>${t("CLOSED")}</span></strong> - ${_site.c_opensAt ? _site.c_opensAt : t(
-  //       //   "OPENS AT"
-  //       // )} [openingTime] `;
-  //       hoursString = hoursString.replace(
-  //         "[openingTime]",
-  //         openClose.formatTime(nextInterval.start)
-  //       );
-  //     } else {
-  //       hoursString = `<strong><span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span></strong> -  ${_site.c_opensAt ? _site.c_opensAt : t(
-  //         "OPENS AT"
-  //       )}  [openingTime]`;
-  //       // hoursString = `<strong><span>${t("CLOSED")}</span></strong> -  ${_site.c_opensAt ? _site.c_opensAt : t(
-  //       //   "OPENS AT"
-  //       // )}  [openingTime]`;
-  //       hoursString = hoursString.replace(
-  //         "[openingTime]",
-  //         openClose.formatTime(nextInterval.start)
-  //       );
-  //     }
-  //   }
-  //   return hoursString;
-  // },
-
-  formatOpenNowString: (hoursData: any, timeZone: any, t: any, _site: any) => {
+  formatOpenNowString: (hoursData: any, timeZone: any) => {
     var Day = 0;
     const now = new Date();
     let currentTime = new Date(
@@ -216,7 +77,7 @@ const openClose = {
           if (
             startIntervalNumber > nowTimeNumber &&
             startIntervalNumber <
-            openClose.timeStringToNumber(nextInterval.start)
+              openClose.timeStringToNumber(nextInterval.start)
           ) {
             nextInterval = interval;
           }
@@ -292,7 +153,7 @@ const openClose = {
       }
       else if (
         openClose.getIntervalOnDate(
-          new Date(nextTomorrow.getTime() + 86400000 + 259200000),
+          new Date(nextTomorrow.getTime()+86400000 + 259200000),
           hoursData
         )
       ) {
@@ -309,39 +170,38 @@ const openClose = {
       }
     }
     let week = [
-      _site?.c_sunday, _site?.c_monday, _site?.c_tuesday, _site?.c_wednesday, _site?.c_thursday, _site?.c_friday, _site?.c_saturday
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
     ];
 
-    let hoursString = "";
+    let hoursString = "Closed";
     if (openRightNow) {
       if (
         currentInterval.start === "00:00" &&
         currentInterval.end === "23:59"
       ) {
-        hoursString = _site.c_open24Hours ? _site.c_open24Hours : t("Open 24 Hours");
+        hoursString = "Open 24 Hours";
       } else {
-        hoursString = `<strong><span>${_site.c_open ? _site.c_open : t("OPEN")}</span></strong> - ${_site.c_closesAt ? _site.c_closesAt : t("CLOSES AT")} [closingTime]`;
+        hoursString = "Open - Closes at [closingTime]";
         hoursString = hoursString.replace("[closingTime]", currentInterval.end);
       }
     } else if (nextInterval) {
       if (nextIsTomorrow) {
-        hoursString = `<strong><span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span></strong> - ${_site.c_opensAt ? _site.c_opensAt : t(
-          "OPENS AT"
-        )} [openingTime] ${week[Day]}`;
+        hoursString = `Closed - Opens at [openingTime] ${week[Day]} `;
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       } else {
-        hoursString = `<strong><span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span></strong> - ${_site.c_opensAt ? _site.c_opensAt : t(
-          "OPENS AT"
-        )} [openingTime] `;
+        hoursString = "Closed - Opens at [openingTime]";
         hoursString = hoursString.replace("[openingTime]", nextInterval.start);
       }
     }
     return hoursString;
   },
-
-
-
-  getYextTimeWithUtcOffset: (entityUtcOffsetSeconds: number) => {
+  getYextTimeWithUtcOffset: (entityUtcOffsetSeconds:any) => {
     const now = new Date();
     let utcOffset = 0;
     if (entityUtcOffsetSeconds) {
@@ -422,50 +282,43 @@ const openClose = {
   formatTime: (time: any) => {
     const tempDate = new Date("January 1, 2020 " + time);
     const localeString = "en-US";
-
-    let timeString = tempDate.toLocaleTimeString(
-      localeString.replace("_", "-"),
-      {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-      }
-    );
-
-    if (timeString == "24:00") {
-      return "00:00";
-    } else {
-      return timeString;
-    }
+    return tempDate.toLocaleTimeString(localeString.replace("_", "-"), {
+      hour: "numeric",
+      minute: "numeric",
+    });
+  },
+  getUtcOffsetFromTimeZone: (timeZone: any, date = new Date()) => {
+    const tz = date
+      .toLocaleString("en-gb", { timeZone, timeStyle: "long" })
+      .split(" ")
+      .slice(-1)[0];
+    const dateString = date.toString();
+    const offset =
+      Date.parse(`${dateString} UTC`) - Date.parse(`${dateString} ${tz}`);
+    return openClose.msToTime(offset);
+  },
+  msToTime: (duration: any) => {
+    var milliseconds = Math.floor((duration % 1000) / 100),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    hours = hours < 10 ? hours : hours;
+    return hours + ":00";
   },
 };
 
 export default function OpenCloseStatus(props: any) {
-  const { t } = useTranslation();
-
   return (
-    <>
-      {props.hours && props.hours.reopenDate ? (
-        <p className="">{props._site.c_temporarilyClosed ? props._site.c_temporarilyClosed : t("Temporarily Closed")}</p>
-      ) : props.hours ? (
-        <div className="store-open-close-status"
-          dangerouslySetInnerHTML={{
-            __html: openClose.formatOpenNowString(
-              props.hours,
-              props.timezone,
-              t,
-              props._site
-
-
-            ),
-          }}
-        />
-
+    <div className="">
+      {props?.hours && props?.hours?.reopenDate ? (
+        <p className="">Temporarily Closed</p>
+      ) : props?.hours ? (
+        <p className="closeing-div onhighLight">
+          {openClose.formatOpenNowString(props.hours, props.timezone)}
+        </p>
       ) : (
-        <p className="closed">{props._site?.c_closed ? props._site?.c_closed : t("CLOSED")}</p>
-
-
+        <p className="closed">Closed</p>
       )}
-    </>
+    </div>
   );
 }

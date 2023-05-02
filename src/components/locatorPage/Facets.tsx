@@ -203,7 +203,7 @@ export default function Facets(props: FacetsProps): JSX.Element {
           </a>
         </div>
         <div className="flex justify-between">
-          <h4>{props._site?.c_filter ? props._site?.c_filter : t("Filters")}</h4>
+         
 
 
           <button onClick={handleResetFacets} className="filter-reset">

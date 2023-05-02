@@ -204,6 +204,7 @@ const SearchLayout = (props: any): JSX.Element => {
                   handleStatusModal={statusModal}
                   isDataAvailable={null}
                 />
+                
               </div>
             </div>
 
@@ -230,7 +231,6 @@ const SearchLayout = (props: any): JSX.Element => {
                 <div className={`total-location ${fixed}`}>
                   <p onClick={() => hideMapInMobile()}>
                     {<ResultsCount />}
-                    <span className="ml-1">{t("NEARBY ADDRESSES")}</span>
                   </p>
                 </div>
                   {/* {resultCount > 0 ? <></> : <p>{t("No Location found")}</p>} */}

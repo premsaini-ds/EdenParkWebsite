@@ -9,7 +9,7 @@ const openClose = {
     }
     const now = new Date();
     let currentTime = new Date(
-      now.toLocaleString("en-US", { timeZone: timeZone })
+      now.toLocaleString("en", { timeZone: timeZone })
     );
     const tomorrow = new Date(currentTime.getTime() + 60 * 60 * 24 * 1000);
     const yesterday = new Date(currentTime.getTime() - 60 * 60 * 24 * 1000);
@@ -95,25 +95,58 @@ const openClose = {
         }
       }
     }
-    let hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
-    if (openRightNow) {
-      if (
-        currentInterval.start === "00:00" &&
-        currentInterval.end === "23:59"
-      ) {
-        hoursString = _site?.c_open24Hours ? _site?.c_open24Hours : t("Open 24 Hours");
-      } else {
-        hoursString = `<span>${_site?.c_open ? _site?.c_open : t("OPEN")}</span>`;
-      }
-    } else if (nextInterval) {
-      if (nextIsTomorrow) {
-        hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
-      } else {
-        hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
-      }
+  //   let hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
+  //   if (openRightNow) {
+  //     if (
+  //       currentInterval.start === "00:00" &&
+  //       currentInterval.end === "23:59"
+  //     ) {
+  //       hoursString = _site?.c_open24Hours ? _site?.c_open24Hours : t("Open 24 Hours");
+  //     } else {
+  //       hoursString = `<span>${_site?.c_open ? _site?.c_open : t("OPEN today")}</span>`;
+  //     }
+  //   } else if (nextInterval) {
+  //     if (nextIsTomorrow) {
+  //       hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
+  //     } else {
+  //       hoursString = `<span>${_site?.c_closed ? _site?.c_closed : t("CLOSED")}</span>`;
+  //     }
+  //   }
+  //   return hoursString;
+  // },
+  let week = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  var Day = 0;
+  let hoursString = "Closed";
+  if (openRightNow) {
+    if (
+      currentInterval.start === "00:00" &&
+      currentInterval.end === "23:59"
+    ) {
+      hoursString = "Open 24 Hours";
+    } else {
+      hoursString = "Open - Closes at [closingTime]";
+      hoursString = hoursString.replace("[closingTime]", currentInterval.end);
     }
-    return hoursString;
-  },
+  } else if (nextInterval) {
+    if (nextIsTomorrow) {
+      hoursString = `Closed - Open Today [openingTime] ${week[Day]} `;
+      hoursString = hoursString.replace("[openingTime]", nextInterval.start);
+    } else {
+      hoursString = "Closed - Open Today [openingTime]";
+      hoursString = hoursString.replace("[openingTime]", nextInterval.start +"-"+ nextInterval.end);
+     
+    }
+  }
+  return hoursString;
+},
   getYextTimeWithUtcOffset: (entityUtcOffsetSeconds: number) => {
     const now = new Date();
     let utcOffset = 0;
@@ -192,9 +225,10 @@ const openClose = {
       return null;
     }
   },
+  
   formatTime: (time: any) => {
     const tempDate = new Date("January 1, 2020 " + time);
-    const localeString = "en-US";
+    const localeString = "en";
 
     let timeString = tempDate.toLocaleTimeString(
       localeString.replace("_", "-"),
@@ -213,9 +247,14 @@ const openClose = {
   },
 };
 
+
+
+
 export default function TimeStatus(props: any) {
   const { t } = useTranslation();
 
+  console.log("pkkkks",props.hours)
+  
   return (
     <>
       {props.hours && props.hours.reopenDate ? (

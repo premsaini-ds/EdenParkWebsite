@@ -61,7 +61,7 @@ import Arrow from "../components/locationDetails/Arrow";
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   var url = "";
-  url = 'locatorsearch';
+  url = 'index.html';
   return url;
 };
 

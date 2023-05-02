@@ -9,7 +9,9 @@ const Address = (props: any) => {
           <span className="notHighlight" style={{ wordSpacing: "-1.3px" }}>
             {address.line1 + "," + " "}
           </span>
+         
         )}
+         <br/>
         {address.postalCode && address.city ? (
           <span className="notHighlight" style={{ wordSpacing: "-1.3px" }}>
             {address.postalCode + ","}

@@ -71,6 +71,40 @@ const LocationCard: CardComponent<Location> = (prop): any => {
 
   const { t, i18n } = useTranslation();
 
+  const [showPhoneNumber, showPhoneNumbers] = React.useState('hiddenPhone');
+
+  const showPhone = () => {
+           showPhoneNumbers('ShowPhone');
+  };
+  // console.log("premsainiss",prop?.result?.rawData?.c_itemCategory);
+
+ 
+let cateColor:any;
+let categories = prop?.result?.rawData?.c_itemCategory;
+if(categories == 'Big Store'){
+  cateColor = 'bigsGray';
+}
+else if(categories == 'Multi-brand'){
+  cateColor = 'multibPink';
+}
+else if(categories == 'Shop'){
+  cateColor = 'shopBlack';
+}else{
+  cateColor = '';
+}
+
+
+
+React.useEffect(() => {
+  var els = document.querySelectorAll('.countresultver');
+  console.log(els,"i am here"); 
+  for(var i=0; i < els.length; i++) {
+    els[i].index = i;
+    els[i].innerHTML = i+1;  
+  }
+})
+
+
   return (
     <>
 
@@ -80,18 +114,11 @@ const LocationCard: CardComponent<Location> = (prop): any => {
       >
         <div className="relative w-full mb-2.5">
           <h2 className="location-heading">
+            <span className={"countresultver "+cateColor}></span>
             <Link data-ya-track="title" eventName={`title`} href={`${url}`}>
               {prop.result.rawData.name}
             </Link>
-            {hours &&
-              <a href={url} className="text-green green-label !font-fontPrimary">
-                {" "}
-                {hours && <TimeStatus timezone={timezone} hours={hours} _site={prop._site}></TimeStatus>
-
-                }
-
-              </a>}
-
+          
 
 
 
@@ -109,8 +136,32 @@ const LocationCard: CardComponent<Location> = (prop): any => {
 
             </div>
           </div>
+
+          {/* <Hours hours={hours ? hours : {}}
+          timezone={timezone ? timezone : {}} deliveryHours={undefined} _site={undefined}/> */}
+
+            {hours &&
+              <a href={url} className="text-green green-label !font-fontPrimary">
+                {" "}
+                {hours && <TimeStatus timezone={timezone} hours={hours} _site={prop._site}></TimeStatus>
+
+                }
+
+              </a>}
+
+          <div className="listingButtons">
+                    
+        <Link
+          data-ya-track="getdirections"
+          eventName={`getdirections`}
+          className="consulation"
+          href={`${url}`}
+        >
+
+          {prop._site?.c_loctorMoreInformation ? prop._site?.c_loctorMoreInformation : t("View Detail")}
+        </Link>
           {mainPhone ? (
-            <div className="icon-row main-phone">
+            <div className={"icon-row main-phone "+showPhoneNumber}>
               {" "}
               <PhoneNumber phone={prop.result.rawData.mainPhone} />
               {/* <Link
@@ -120,22 +171,17 @@ const LocationCard: CardComponent<Location> = (prop): any => {
               > */}
               {/* {updatedPhone}{" "} */}
               {/* </Link> */}
-            </div>
+              <button className={"em-poi-card__phone em-button em-button--primary"} onClick={showPhone} type="button">Show Phone</button>
+
+            </div>             
           ) : (
             ""
           )}
 
+    
+        </div>
         </div>
 
-        <Link
-          data-ya-track="getdirections"
-          eventName={`getdirections`}
-          className="consulation"
-          href={`${url}`}
-        >
-
-          {prop._site?.c_loctorMoreInformation ? prop._site?.c_loctorMoreInformation : t("More information")}
-        </Link>
       </div>
     </>
   );

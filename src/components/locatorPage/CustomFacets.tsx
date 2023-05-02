@@ -166,12 +166,30 @@ const CustomFacets = ({
     <>
       <Skeleton count={1} />
       {facet ? <>
-
-        <Swiper spaceBetween={5} slidesPerView={3}>
+        <SwiperSlide>
+                <div className="flex items-center space-x-3 peer filter-btn customFilters">
+                  <a
+                    className={isDataAvailable ? "cursor-pointer" : "cursor-auto"}
+                    href="javascript:void(0);"
+                    onClick={handleStatusModal}
+                  >
+                    {svgIcons.filter}
+                  </a>
+                </div>
+                <div className="listingCategorized">
+                  <ul>
+                    <li><span className="shopBlack"></span><span>Shop</span></li>
+                    <li><span className="bigsGray"></span>Big Store</li>
+                    <li><span className="multibPink"></span>Multi-brand</li>
+                  </ul>
+                </div>
+              </SwiperSlide>
+              
+        {/* <Swiper spaceBetween={5} slidesPerView={3}>
           <div className="">
             <div className="flex flex-nowrap gap-2.5">
 
-              <SwiperSlide>
+             <SwiperSlide>
                 <div className="flex items-center space-x-3 peer filter-btn">
                   <a
                     className={isDataAvailable ? "cursor-pointer" : "cursor-auto"}
@@ -181,8 +199,8 @@ const CustomFacets = ({
                     {svgIcons.filter}
                   </a>
                 </div>
-              </SwiperSlide>
-              <SwiperSlide>
+              </SwiperSlide> 
+               <SwiperSlide>
                 <div
                   className="flex items-center space-x-3 peer all-store"
                   id="allStore"
@@ -230,7 +248,7 @@ const CustomFacets = ({
               })}
             </div>
           </div>
-        </Swiper>
+        </Swiper> */}
 
 
       </> : <Skeleton count={1} />

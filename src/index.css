@@ -839,7 +839,7 @@ abbr:where([title]) {
   @apply pb-5 md:pb-0;
 }
 .left-block-locator .total-location p {
-  @apply text-sm font-light text-white uppercase p-5 border-b-2 border-b-black relative cursor-pointer lg:cursor-default after:bg-arrowUpwards after:content-[""] md:after:content-none  after:absolute after:right-5 after:top-2/4 after:-translate-y-2/4 after:w-3 after:h-3 after:bg-no-repeat after:rotate-180;
+  @apply text-sm font-light text-black uppercase p-5 border-b-2 border-b-black relative cursor-pointer lg:cursor-default after:bg-arrowUpwards after:content-[""] md:after:content-none  after:absolute after:right-5 after:top-2/4 after:-translate-y-2/4 after:w-3 after:h-3 after:bg-no-repeat after:rotate-180;
 }
 
 body.stop-scrolling .left-block-locator .total-location p {
@@ -2077,7 +2077,7 @@ ul.nav.opened li {
   @apply text-xl sm:text-[25px] leading-[33.75px] font-normal capitalize font-saintGermain;
 }
 .location-heading {
-  @apply flex justify-between items-center gap-5;
+  @apply flex items-center gap-5;
 }
 
 .location-heading .green-label span {
@@ -4777,12 +4777,9 @@ body.nav-opened
 }
 
 .left-block-locator .total-location {
-  text-transform: uppercase;
-  text-align: center;
-  position: sticky;
-  background-color: #020012;
+  text-align: right;
   margin-bottom: 10px;
-  z-index: 1;
+  
 }
 
 
@@ -4816,4 +4813,90 @@ body.nav-opened
   color: black;
   font-weight: 500;
   font-size: 18px;
+}
+
+.icon-row.main-phone a.Link {
+    background: black;
+    color: #fff;
+    padding: 10px;
+}
+
+.icon-row.main-phone button.em-poi-card__phone.em-button.em-button--primary {
+  background: black;
+  color: #fff;
+  padding: 10px;
+}
+
+.hiddenPhone a.Link {
+  display: none;
+}
+.ShowPhone button.em-poi-card__phone.em-button.em-button--primary {
+  display: none;
+}
+.listingButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top:15px;
+}
+.listingButtons .icon-row.main-phone {
+  width: 40%;
+}
+.listingButtons a.Link.consulation {
+  width: 40%;
+}
+.listingCategorized ul li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.shopBlack {
+  height: 20px;
+  width: 20px !important;
+  background-color: #000000 !important;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.bigsGray {
+  height: 20px;
+  width: 20px !important;
+  background-color: #e4e4e4 !important;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.multibPink {
+  height: 20px;
+  width: 20px !important;
+  background-color: #e8afc6 !important;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.swiper-slide {
+  display: flex !important;
+}
+.listingCategorized {
+  width: 70%;
+}
+.customFilters{
+  width: 30%;
+}
+
+span.countresultver {
+  padding: 8px 10px;
+  margin: 10px;
+  border-radius: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  color: #000 !important;
+  font-weight: 600;
+  text-align: center;
+}
+span.countresultver.shopBlack {
+  color: #fff !important;
 }
