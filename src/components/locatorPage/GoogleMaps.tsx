@@ -18,15 +18,18 @@ import {
   getUserLatLng,
   getUserLocationDetails,
 } from "../locationDetails/commonFunction/index";
-import retailersPin from "../../images/diptyqueRetailersPin.png";
+// import retailersPin from "../../images/diptyqueRetailersPin.png";
+import retailersPin from "../../images/multibrand.png";
 import retailersHoverPin from "../../images/diptyqueRetailersHoverPin.png";
-import storesPin from "../../images/diptyqueStoresPin.png";
+// import storesPin from "../../images/diptyqueStoresPin.png";
+import storesPin from "../../images/bigstore.png";
 import storesHoverPin from "../../images/diptyqueStoresHoverPin.png";
 import { Matcher, SelectableFilter } from "@yext/search-headless-react";
 import transparent from "../../images/transparent.png";
 import { getMapRadiusVisibalPart, setMapRadius } from "../locationDetails/commonFunction/GoogleMapHelper";
 import { limit } from "../../types/constants";
-import defaultMarker from "../../images/defaultMarker.png";
+// import defaultMarker from "../../images/defaultMarker.png";
+import defaultMarker from "../../images/shop.png";
 import { Map } from "mapbox-gl";
 import $ from "jquery";
 /**
@@ -167,23 +170,42 @@ export function GoogleMaps(props: any) {
 
 
 
-  useEffect(() => {
-    console.log('userCurrentLocation first map', props.userCurrentLocation);
-    if (props.userCurrentLocation && props.userCurrentLocation.latitude && props.userCurrentLocation.longtitude) {
-      const position = {
-        lat: parseFloat(props.userCurrentLocation.latitude),
-        lng: parseFloat(props.userCurrentLocation.longtitude),
-      };
-      new google.maps.Marker({
-        position: position,
-        map: map,
+  // useEffect(() => {
+    // console.log('userCurrentLocation first map', props.userCurrentLocation);
+    // if (props.userCurrentLocation && props.userCurrentLocation.latitude && props.userCurrentLocation.longtitude) {
+    //   const position = {
+    //     lat: parseFloat(props.userCurrentLocation.latitude),
+    //     lng: parseFloat(props.userCurrentLocation.longtitude),
+    //   };
+    //   new google.maps.Marker({
+    //     position: position,
+    //     map: map,
+    //     icon: addressicon,
+    //   });
+    // }
+// console.log("dfdsfsdfsdf",centerLatitude);
+    const position = {
+      lat: parseFloat(centerLatitude),
+      lng: parseFloat(centerLongitude),
+    };
+     new google.maps.Marker({
+        position,
+        map,
         icon: addressicon,
-      });
-    }
+        });
+        
+  // })
 
-  }, [props.userCurrentLocation])
-
-
+  // const position = {
+  //         lat: parseFloat(centerLatitude),
+  //         lng: parseFloat(centerLongitude),
+  //       };
+  // const Usermarker1 = new google.maps.Marker({
+  //   position,
+  //   map,
+  //   icon: addressicon,
+  // });
+  // usermarker.current.push(Usermarker1);
 
   try {
     if (mapMarkerClusterer) {
@@ -562,27 +584,32 @@ export function GoogleMaps(props: any) {
 
 
   function getMarkerPin(result: any) {
+
+    // console.log("premsaini123",result?.rawData?.c_itemCategory);
     let m_icon = marker_icon;
-    if (typeof result.rawData.c_storesType != "undefined") {
-      if (result.rawData.c_storesType == "Retailer") {
+    if (result?.rawData?.c_itemCategory) {
+
+      if (result?.rawData?.c_itemCategory == "Multi-brand") {
+            m_icon = {
+                   url: retailersPin,
+            };
+      } else if (result?.rawData?.c_itemCategory == "Big Store") {
         m_icon = {
-          url: retailersPin,
+                url: storesPin,
         };
-      } else if (
-        result.rawData.c_storesType == "Maisons Diptyque" ||
-        result.rawData.c_storesType == "Boutique"
-      ) {
-        m_icon = {
-          url: storesPin,
+      }else{
+           m_icon = {
+                  url: defaultMarker,
         };
       }
 
-    } else {
-      m_icon = {
-        url: defaultMarker,
-      };
+    } 
+    // else {
+    //          m_icon = {
+    //                   url: defaultMarker,
+    //         };
 
-    }
+    // }
     return m_icon;
   }
 

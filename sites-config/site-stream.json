@@ -6,6 +6,7 @@
 "fields": [
             "c_headers",
             "c_locatorPageHeading",
+            "c_locatorPageDescription",
             "c_footerLogo",
             "c_footerBottomContent",
             "c_copyrightText"

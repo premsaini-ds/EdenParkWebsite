@@ -4900,3 +4900,10 @@ span.countresultver {
 span.countresultver.shopBlack {
   color: #fff !important;
 }
+
+.locatorHeading p.sec_description {
+  font-size: 25px;
+  margin: 43px 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}

@@ -1,11 +1,13 @@
-import {
-  useSearchState,
-} from "@yext/search-headless-react";
+import { useSearchState, useSearchActions, SelectableFilter, Matcher} from "@yext/search-headless-react";
 import { useState } from "react";
 import * as React from "react";
 import LocationCard from "./LocationCard";
 import { GoogleMaps } from "./GoogleMaps";
-import { googleMapsConfig, limit } from "../../types/constants";
+import {
+  AnswerExperienceConfig,
+  googleMapsConfig,
+  limit,
+} from "../../types/constants";
 import Herobanner from "../commons/Herobanner";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import InfowindowComponent from "../locatorPage/InfowindowComponent";
@@ -20,8 +22,11 @@ import CustomFacets from "../locatorPage/CustomFacets";
 import FacetsPopup from "./FacetsPopup";
 import { consoleLog } from "../locationDetails/commonFunction";
 import $ from "jquery";
+import { svgIcons } from "../../svgIcon ";
+import Geocode from "react-geocode";
 
 const SearchLayout = (props: any): JSX.Element => {
+  const searchActions = useSearchActions();
   const [locale, setLocale] = React.useState(props.updatedlocale);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [fixed, setFixed] = useState("");
@@ -38,16 +43,18 @@ const SearchLayout = (props: any): JSX.Element => {
   const [showMap, setShowMap] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [openHeight, setOpenHeight] = useState("");
-  const [isMapboxOpen, setMapboxopen] = useState('')
+  const [isMapboxOpen, setMapboxopen] = useState("");
   const [userCurrentLocation, setUserCurrentLocation]: any = useState(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [zoomlevel, setZoomlevel] = React.useState(8);
+  const [allowlocation, setallowLocation] = React.useState("");
+  const [modelopen, setModelOpen] = useState(false);
+  const [isUserLocation, setIsUserLocation] = React.useState<boolean>(false);
+  const [check, setCheck] = useState(false);
 
   const statusModal = () => {
-
     facets?.map((i: any) => {
-      if (
-        i.fieldId == "name" ||
-        i.fieldId == "address.region"
-      ) {
+      if (i.fieldId == "name" || i.fieldId == "address.region") {
         if (i.options.length == 0) {
           setIsOpen(false);
         } else {
@@ -73,14 +80,14 @@ const SearchLayout = (props: any): JSX.Element => {
       latitude: "",
       longitude: "",
       radius: 5000,
-      is_search: false
+      is_search: false,
     });
 
   /* When this component render very first time then this UseEffect will run and Check our screen size
   and call handleMediaQueryChange function */
 
   React.useEffect(() => {
-    console.log(resultCount, 'resultCount')
+    console.log(resultCount, "resultCount");
     $("html, body").animate({ scrollTop: 0 }, "slow");
     localStorage.setItem("IsInputBlank", "false");
     const mediaQuery = window.matchMedia("(max-width: 767px)");
@@ -95,18 +102,16 @@ const SearchLayout = (props: any): JSX.Element => {
     };
   }, []);
 
-
-
   /* This handleMediaQueryChange function check if screen is small it will update ouir state (setIsSmallScreen)*/
   const handleMediaQueryChange = (mediaQuery: any) => {
     if (mediaQuery.matches) {
-      setMapboxopen('open')
+      setMapboxopen("open");
       setFixed("fixed");
       document.body.classList.add("stop-scrolling");
       setIsSmallScreen(true);
       setShowMap(true);
     } else {
-      setMapboxopen('')
+      setMapboxopen("");
       setFixed("");
       setIsSmallScreen(false);
       document.body.classList.remove("stop-scrolling");
@@ -130,6 +135,159 @@ const SearchLayout = (props: any): JSX.Element => {
       }
     }
   };
+
+  let userMyLocationBlockMessage = "Please Allow Your Location";
+  let NoLocationsAvailable = props.NoLocationsAvailable;
+
+  var params1: any = { latitude: centerLatitude, longitude: centerLongitude };
+  const [newparam, SetNewparam] = React.useState({
+    latitude: 0,
+    longitude: 0,
+  });
+  var mapzoom = 8;
+  const FirstLoad = () => {
+  
+    setCheck(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const params: any = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          params1 = params;
+          SetNewparam(params1);
+          mapzoom = 3;
+          // const locationFilter: SelectableFilter = {
+          //   selected: true,
+          //   fieldId: "builtin.location",
+          //   value: {
+          //     lat: params.latitude,
+          //     lng: params.longitude,
+          //     radius: 50000000000,
+          //   },
+
+          //   matcher: Matcher.Near,
+          // };
+
+          // searchActions.setOffset(0);
+          // searchActions.setStaticFilters([locationFilter]);
+
+          searchActions.setUserLocation(params1);
+          searchActions.setVerticalLimit(limit);
+          searchActions.executeVerticalQuery();
+        },
+        function (error) {
+          if (error.code == error.PERMISSION_DENIED) {
+          }
+        }
+      );
+    }
+    params1 = {
+      latitude: 44.500000,
+      longitude: -89.500000,
+    };
+    SetNewparam(params1);
+    // mapzoom=8;
+    // const locationFilter: SelectableFilter = {
+    //   selected: true,
+    //   fieldId: "builtin.location",
+    //   value: {
+    //     lat: params1.latitude,
+    //     lng: params1.longitude,
+    //     radius: 1000000000,
+    //   },
+
+    //   matcher: Matcher.Near,
+    // };
+
+    // // searchActions.setOffset(0);
+    // searchActions.setStaticFilters([locationFilter]);
+    searchActions.setUserLocation(params1);
+    searchActions.setVerticalLimit(limit);
+    searchActions.executeVerticalQuery();
+    setTimeout(() => {
+      setIsloading(false);
+      $("body").removeClass("overflow-hidden");
+    }, 3100);
+  };
+
+
+  const onClick = () => {
+    setZoomlevel(4);
+    if (navigator.geolocation) {
+      const error = (error: any) => {
+        if (error.code == 1) {
+          setallowLocation(userMyLocationBlockMessage);
+          setModelOpen(true);
+        }
+        setUserCurrentLocation(false);
+      };
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          setIsUserLocation(true);
+          Geocode.setApiKey(googleMapsConfig.googleMapsApiKey);
+          Geocode.fromLatLng(
+            position.coords.latitude,
+            position.coords.longitude
+          ).then(
+            (response: any) => {
+              console.log("response", response);
+
+              if (response.results[0]) {
+                if (inputRef.current) {
+                  inputRef.current.value =
+                    response.results[0].formatted_address;
+                }
+
+                let pacInput: any = document?.getElementById("pac-input");
+                if (pacInput) {
+                  pacInput.value = response.results[0].formatted_address;
+                  pacInput.focus();
+                }
+
+                setallowLocation("");
+                searchActions.setUserLocation({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                });
+              }
+            },
+            (error: any) => {
+              console.error(error);
+              setCheck(false);
+            }
+          );
+          searchActions.setUserLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          searchActions.setVertical(AnswerExperienceConfig.verticalKey);
+          searchActions.setOffset(0);
+          searchActions.setVerticalLimit(limit);
+          searchActions.executeVerticalQuery();
+        },
+        error,
+        {
+          timeout: 10000,
+        }
+      );
+    }
+  };
+
+  var firstTimeRunners = true;
+  const [isLoading, setIsloading] = React.useState(true);
+  React.useEffect(() => {
+    if (firstTimeRunners) {
+        firstTimeRunners = false;
+        FirstLoad();
+    }
+
+if (isLoading) {
+         $("body").addClass("overflow-hidden");
+}
+
+}, []);
   return (
     <>
       <Wrapper
@@ -139,24 +297,28 @@ const SearchLayout = (props: any): JSX.Element => {
       >
         <div className="container-full-width">
           <div className="locator breadcrumb">
-                <ul>
-                  <li>
-                    <a href="#">
-                    Home
-                    </a>
-                  </li>
-                
-                  <li>Store Locator</li>
-                </ul>
-            </div>
-            <div className="w-full text-center mb-[3.75rem] locatorHeading">
-              <h3 className="sec_heading"> {props._site?.c_locatorPageHeading}</h3>
-          </div>
+            <ul>
+              <li>
+                <a href="#">Home</a>
+              </li>
 
+              <li>Store Locator</li>
+            </ul>
+          </div>
+          <div className="w-full text-center mb-[3.75rem] locatorHeading">
+            <h3 className="sec_heading">
+              {" "}
+              {props._site?.c_locatorPageHeading}
+            </h3>
+            <p className="sec_description">
+              {" "}
+              {props._site?.c_locatorPageDescription}
+            </p>
+          </div>
         </div>
-     
-        
-       
+
+      
+
         <div className=" mx-auto w-full flex flex-col max-h-full">
           <div className="locator-container">
             <div
@@ -185,6 +347,23 @@ const SearchLayout = (props: any): JSX.Element => {
               )}
             </div>
             <div className="search-box">
+            {allowlocation?.length > 0 ? (
+                <div className="for-allow">{allowlocation}</div>
+              ) : (
+                ""
+              )}
+              <div className="location-with-filter">
+                {/* Use My Location button */}
+                <button
+                  className="ghost-button before-icon"
+                  title="Search using your current location!"
+                  id="useLocation"
+                  onClick={onClick}
+                >
+                  {svgIcons.UseMylocationIcon}
+                  Use My Location
+                </button>
+              </div>
               <Herobanner
                 layoutData={bannerAndMapConnectivity}
                 setLayoutData={setBannerAndMapConnectivity}
@@ -204,17 +383,19 @@ const SearchLayout = (props: any): JSX.Element => {
                   handleStatusModal={statusModal}
                   isDataAvailable={null}
                 />
-                
               </div>
             </div>
 
-            <div className={`right-block-locator map-box ${isMapboxOpen}`} id="map-box">
+            <div
+              className={`right-block-locator map-box ${isMapboxOpen}`}
+              id="map-box"
+            >
               <GoogleMaps
                 layoutData={bannerAndMapConnectivity}
                 setLayoutData={setBannerAndMapConnectivity}
                 apiKey={googleMapsConfig.googleMapsApiKey}
-                centerLatitude={centerLatitude}
-                centerLongitude={centerLongitude}
+                centerLatitude={googleMapsConfig.centerLatitude}
+                centerLongitude={googleMapsConfig.centerLongitude}
                 defaultZoom={2}
                 showEmptyMap={true}
                 language={locale}
@@ -225,14 +406,14 @@ const SearchLayout = (props: any): JSX.Element => {
             </div>
 
             <div className="left-block-locator">
-              <PerfectScrollbar className={`${openHeight} result-list`} id="result-list">
-              
+              <PerfectScrollbar
+                className={`${openHeight} result-list`}
+                id="result-list"
+              >
                 <div className="px-5 info-window-wrapper">
-                <div className={`total-location ${fixed}`}>
-                  <p onClick={() => hideMapInMobile()}>
-                    {<ResultsCount />}
-                  </p>
-                </div>
+                  <div className={`total-location ${fixed}`}>
+                    <p onClick={() => hideMapInMobile()}>{<ResultsCount />}</p>
+                  </div>
                   {/* {resultCount > 0 ? <></> : <p>{t("No Location found")}</p>} */}
                   <div id="infowindow">
                     {locationResults && locationResults.length > 0 && (
@@ -259,18 +440,17 @@ const SearchLayout = (props: any): JSX.Element => {
                               ? props._site?.c_viewMore
                               : t("View More")
                           }
-                        // noResult={
-                        //   locationResults && locationResults.length > 0
-                        //     ? true
-                        //     : false
-                        // }
+                          // noResult={
+                          //   locationResults && locationResults.length > 0
+                          //     ? true
+                          //     : false
+                          // }
                         />
                       </div>
                     </>
                   )}
                 </div>
               </PerfectScrollbar>
-
             </div>
           </div>
         </div>
