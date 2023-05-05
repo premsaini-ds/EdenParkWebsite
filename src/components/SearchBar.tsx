@@ -23,10 +23,10 @@ const SearchBar = (props: any) => {
         }
       }
     );
-    if (place) {
-      setInputValue(place.formatted_address)
-      window.location.replace(`/${props.locale}/index.html?query=${place.formatted_address}`);
-    }
+    // if (place) {
+    //   setInputValue(place.formatted_address)
+    //   window.location.replace(`/${props.locale}/index.html?query=${place.formatted_address}`);
+    // }
   }
   const { t } = useTranslation();
 

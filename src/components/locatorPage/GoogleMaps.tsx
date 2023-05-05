@@ -63,7 +63,7 @@ let mapMarkerClusterer: { clearMarkers: () => void } | null = null;
 
 const builtInCssClasses: Readonly<GoogleMapsCssClasses> = {
   googleMapsContainer:
-    "map-box-wrapper w-full h-[calc(100vh_-_28.30rem)] md:h-[calc(100vh_-_12.313rem)] lg:h-[calc(140vh_-_13.125rem)] top-0 order-1 lg:order-none z-[1]",
+    "map-box-wrapper w-full h-[calc(100vh_-_28.30rem)] md:h-[calc(100vh_-_12.313rem)] lg:h-[calc(170vh_-_13.125rem)] top-0 order-1 lg:order-none z-[1]",
 };
 
 /**
@@ -86,7 +86,7 @@ const builtInCssClasses: Readonly<GoogleMapsCssClasses> = {
 export function GoogleMaps(props: any) {
 
   let centerLatitude = props.centerLatitude;
-  let centerLongitude = props.centerLatitude;
+  let centerLongitude = props.centerLongitude;
   let zoom = props.defaultZoom;
   let showEmptyMap = props.showEmptyMap;
   let providerOptions = props.providerOptions;
@@ -169,30 +169,44 @@ export function GoogleMaps(props: any) {
   }
 
 
+  if (props.userCurrentLocation == null) {
+  const position = {
+    lat: parseFloat(centerLatitude),
+    lng: parseFloat(centerLongitude),
+  };
+   new google.maps.Marker({
+      position,
+      map,
+      icon: addressicon,
+      });
+    }
 
-  // useEffect(() => {
-    // console.log('userCurrentLocation first map', props.userCurrentLocation);
-    // if (props.userCurrentLocation && props.userCurrentLocation.latitude && props.userCurrentLocation.longtitude) {
-    //   const position = {
-    //     lat: parseFloat(props.userCurrentLocation.latitude),
-    //     lng: parseFloat(props.userCurrentLocation.longtitude),
-    //   };
-    //   new google.maps.Marker({
-    //     position: position,
-    //     map: map,
-    //     icon: addressicon,
-    //   });
-    // }
-// console.log("dfdsfsdfsdf",centerLatitude);
-    const position = {
-      lat: parseFloat(centerLatitude),
-      lng: parseFloat(centerLongitude),
-    };
-     new google.maps.Marker({
-        position,
-        map,
+  useEffect(() => {
+    console.log('userCurrentLocation first map', props.userCurrentLocation);
+    if (props.userCurrentLocation && props.userCurrentLocation.latitude && props.userCurrentLocation.longtitude && props.userCurrentLocation != null) {
+      const position = {
+        lat: parseFloat(props.userCurrentLocation.latitude),
+        lng: parseFloat(props.userCurrentLocation.longtitude),
+      };
+      new google.maps.Marker({
+        position: position,
+        map: map,
         icon: addressicon,
-        });
+      });
+    }
+
+  }, [props.userCurrentLocation])
+
+
+    // const position = {
+    //   lat: parseFloat(centerLatitude),
+    //   lng: parseFloat(centerLongitude),
+    // };
+    //  new google.maps.Marker({
+    //     position,
+    //     map,
+    //     icon: addressicon,
+    //     });
         
   // })
 
@@ -315,11 +329,11 @@ export function GoogleMaps(props: any) {
 
   function updateParam(latestUserInput: any) {
     // consoleLog('Update param');
-    var paramValue = latestUserInput; // Replace with your updated value
-    var searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('query', paramValue);
-    var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
-    window.history.replaceState({}, '', newUrl);
+    // var paramValue = latestUserInput; // Replace with your updated value
+    // var searchParams = new URLSearchParams(window.location.search);
+    // searchParams.set('query', paramValue);
+    // var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
+    // window.history.replaceState({}, '', newUrl);
   };
 
   useEffect(() => {
@@ -437,12 +451,12 @@ export function GoogleMaps(props: any) {
       const createMap = new window.google.maps.Map(ref.current, {
         center,
         zoom,
-        styles: mapStyle,
+        // styles: mapStyle,
         ...providerOptions,
       });
-      createMap.addListener("dragend", function () {
-        updateMarkers(createMap);
-      });
+      // createMap.addListener("dragend", function () {
+      //   updateMarkers(createMap);
+      // });
       setMap(createMap);
     }
     console.log(map?.getZoom(), "effect second ")

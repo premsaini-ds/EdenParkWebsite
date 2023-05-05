@@ -31,10 +31,16 @@ const Herobanner = (props: any) => {
   const bannerAndMapConnectivity = props.layoutData;
   const setBannerAndMapConnectivity = props.setLayoutData;
 
+
+
+  
   const FirstLoad = async () => {
     consoleLog('HIT FIRST LOAD');
     getLatLongFromSearchQuery().then((response: any) => {
-      consoleLog('GET DATA FROM SEARCJ QUERY', response);
+      console.log('GET DATA FROM SEARCJ QUERY', response);
+
+
+
       var locationlatLng: any = {
         latitude: parseFloat(response.latitude),
         longitude: parseFloat(response.longitude),
@@ -112,43 +118,55 @@ const Herobanner = (props: any) => {
   };
 
 
-  function updateParam(latestUserInput: any) {
-    consoleLog('Update param');
-    var paramValue = latestUserInput; // Replace with your updated value
-    var searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('query', paramValue);
-    var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
-    window.history.replaceState({}, '', newUrl);
-  };
+  // function updateParam(latestUserInput: any) {
+  //   consoleLog('Update param');
+  //   var paramValue = latestUserInput; // Replace with your updated value
+  //   var searchParams = new URLSearchParams(window.location.search);
+  //   searchParams.set('query', paramValue);
+  //   var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
+  //   window.history.replaceState({}, '', newUrl);
+  // };
 
   // const Findinput = () => {
   //   let searchKey: any = document.getElementsByClassName("FilterSearchInput");
   //   let Search: any = searchKey[0].value;
   //   if (searchKey[0].value) {
-  //     updateParam(searchKey[0].value);
+  //     // updateParam(searchKey[0].value);
   //     localStorage.setItem('IsInputBlank', "false");
   //     setInputValue("");
   //     getCoordinates(Search);
   //   }
   // };
-  // const Findinput2 = () => {
-  //   var isInputBlank = localStorage.getItem('IsInputBlank');
-  //   if (isInputBlank != 'true') {
-  //     const searchInput: any = document.getElementsByClassName('pac-item');
-  //     selectAllCheckRef.current = searchInput;
-  //     let searchKey: any = document.getElementsByClassName("FilterSearchInput");
-  //     let Search = searchKey[0]?.value;
-  //     if (Search.length == 0) {
-  //       updateParam("");
-  //       localStorage.setItem('IsInputBlank', "true");
-  //       searchActions.setVertical("locations");
-  //       searchActions.setQuery("");
-  //       searchActions.setOffset(0);
-  //       searchActions.setVerticalLimit(limit);
-  //       searchActions.executeVerticalQuery();
-  //     }
-  //   }
-  // };
+
+  const Findinput = () => {
+    let searchKey = document.getElementsByClassName("FilterSearchInput");
+    let Search = searchKey[0].value;
+    searchActions.setOffset(0);
+    if (Search?.length) {
+      setInputValue("");
+      getCoordinates(Search);
+    }
+  };
+
+
+  const Findinput2 = () => {
+    var isInputBlank = localStorage.getItem('IsInputBlank');
+    if (isInputBlank != 'true') {
+      const searchInput: any = document.getElementsByClassName('pac-item');
+      // selectAllCheckRef.current = searchInput;
+      let searchKey: any = document.getElementsByClassName("FilterSearchInput");
+      let Search = searchKey[0]?.value;
+      if (Search.length == 0) {
+        // updateParam("");
+        localStorage.setItem('IsInputBlank', "true");
+        searchActions.setVertical("locations");
+        searchActions.setQuery("");
+        searchActions.setOffset(0);
+        searchActions.setVerticalLimit(limit);
+        searchActions.executeVerticalQuery();
+      }
+    }
+  };
 
   useEffect(() => {
 
@@ -285,7 +303,7 @@ const Herobanner = (props: any) => {
     var text: any = document.getElementById("pac-input");
     if (text.value.length > 0) {
       text.value = "";
-      updateParam("");
+      // updateParam("");
       searchActions.resetFacets();
       searchActions.setOffset(0);
       searchActions.setVerticalLimit(limit)
@@ -366,7 +384,7 @@ const Herobanner = (props: any) => {
 
   return (
     <>
-      <div className="locator-find-block pb-[1.125rem]">
+      <div className="locator-find-blocks">
         {allowlocation.length > 0 ? (
           <div className="for-allow">{allowlocation}</div>
         ) : (
@@ -380,15 +398,34 @@ const Herobanner = (props: any) => {
             placeholder={props._site?.c_placeholderText ? props._site?.c_placeholderText : t("Search by address, city, country...")}
             className="FilterSearchInput"
             onKeyUp={searchLocation}
-          />
 
-          <button
+            onChange={() => Findinput2()}
+            onKeyDown={(evt) => {
+              if (
+                evt.key === "Backspace" ||
+                evt.key === "x" ||
+                evt.key === "Delete"
+              ) {
+                Findinput2();
+              }
+            }}
+          />
+            <button
+                  className="cus_btn search-submit"
+                  aria-label="Search bar icon"
+                  id="search-location-button"
+                  onClick={Findinput}
+                >
+                  {svgIcons.searchIcon}
+                </button>
+          {/* <button
             className="cus_btn search-submit"
             aria-label="Search bar icon"
             onClick={reset}
           >
             {svgIcons.searchClose}
-          </button>
+          </button> */}
+          
         </div>
       </div>
     </>

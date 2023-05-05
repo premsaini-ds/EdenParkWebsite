@@ -24,6 +24,7 @@ import { consoleLog } from "../locationDetails/commonFunction";
 import $ from "jquery";
 import { svgIcons } from "../../svgIcon ";
 import Geocode from "react-geocode";
+import { clearStorage } from "mapbox-gl";
 
 const SearchLayout = (props: any): JSX.Element => {
   const searchActions = useSearchActions();
@@ -71,6 +72,7 @@ const SearchLayout = (props: any): JSX.Element => {
     setlocationData(message);
     data = message;
   };
+
   const resultCount: any =
     useSearchState((state) => state.vertical.resultsCount) || 0;
 
@@ -136,17 +138,15 @@ const SearchLayout = (props: any): JSX.Element => {
     }
   };
 
+// Custom message for use my location
   let userMyLocationBlockMessage = "Please Allow Your Location";
-  let NoLocationsAvailable = props.NoLocationsAvailable;
-
-  var params1: any = { latitude: centerLatitude, longitude: centerLongitude };
+  var params1: any = { };
   const [newparam, SetNewparam] = React.useState({
     latitude: 0,
     longitude: 0,
   });
   var mapzoom = 8;
   const FirstLoad = () => {
-  
     setCheck(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -157,21 +157,22 @@ const SearchLayout = (props: any): JSX.Element => {
           };
           params1 = params;
           SetNewparam(params1);
+          setUserCurrentLocation(params1);
           mapzoom = 3;
-          // const locationFilter: SelectableFilter = {
-          //   selected: true,
-          //   fieldId: "builtin.location",
-          //   value: {
-          //     lat: params.latitude,
-          //     lng: params.longitude,
-          //     radius: 50000000000,
-          //   },
+          const locationFilter: SelectableFilter = {
+            selected: true,
+            fieldId: "builtin.location",
+            value: {
+              lat: params.latitude,
+              lng: params.longitude,
+              radius: 50000000000,
+            },
 
-          //   matcher: Matcher.Near,
-          // };
+            matcher: Matcher.Near,
+          };
 
-          // searchActions.setOffset(0);
-          // searchActions.setStaticFilters([locationFilter]);
+          searchActions.setOffset(0);
+          searchActions.setStaticFilters([locationFilter]);
 
           searchActions.setUserLocation(params1);
           searchActions.setVerticalLimit(limit);
@@ -183,26 +184,27 @@ const SearchLayout = (props: any): JSX.Element => {
         }
       );
     }
+
     params1 = {
-      latitude: 44.500000,
-      longitude: -89.500000,
+      latitude: googleMapsConfig.centerLatitude,
+      longitude: googleMapsConfig.centerLongitude,   
     };
     SetNewparam(params1);
     // mapzoom=8;
-    // const locationFilter: SelectableFilter = {
-    //   selected: true,
-    //   fieldId: "builtin.location",
-    //   value: {
-    //     lat: params1.latitude,
-    //     lng: params1.longitude,
-    //     radius: 1000000000,
-    //   },
+    const locationFilter: SelectableFilter = {
+      selected: true,
+      fieldId: "builtin.location",
+      value: {
+        lat: params1.latitude,
+        lng: params1.longitude,
+        radius: 1000000000,
+      },
 
-    //   matcher: Matcher.Near,
-    // };
+      matcher: Matcher.Near,
+    };
 
-    // // searchActions.setOffset(0);
-    // searchActions.setStaticFilters([locationFilter]);
+    // searchActions.setOffset(0);
+    searchActions.setStaticFilters([locationFilter]);
     searchActions.setUserLocation(params1);
     searchActions.setVerticalLimit(limit);
     searchActions.executeVerticalQuery();
@@ -211,7 +213,9 @@ const SearchLayout = (props: any): JSX.Element => {
       $("body").removeClass("overflow-hidden");
     }, 3100);
   };
+console.log(userCurrentLocation,"userCurrentLocation"); 
 
+          
 
   const onClick = () => {
     setZoomlevel(4);
@@ -288,6 +292,7 @@ if (isLoading) {
 }
 
 }, []);
+console.log(locationData,"locationData")
   return (
     <>
       <Wrapper
@@ -337,7 +342,9 @@ if (isLoading) {
               id="info-window"
               style={{ overflowY: "auto" }}
             >
+
               {Object.keys(locationData).length > 1 && (
+                
                 <>
                   <InfowindowComponent
                     result={locationData}
@@ -347,13 +354,16 @@ if (isLoading) {
               )}
             </div>
             <div className="search-box">
+              <div className="searchBox-Box bg-black p-[1.125rem]">
             {allowlocation?.length > 0 ? (
                 <div className="for-allow">{allowlocation}</div>
               ) : (
                 ""
               )}
-              <div className="location-with-filter">
+              <div className="location-with-filter mb-[2rem]">
                 {/* Use My Location button */}
+                <div className="UseMyLocation">
+                <p className="findStore">Find Store</p>
                 <button
                   className="ghost-button before-icon"
                   title="Search using your current location!"
@@ -363,6 +373,7 @@ if (isLoading) {
                   {svgIcons.UseMylocationIcon}
                   Use My Location
                 </button>
+                </div>
               </div>
               <Herobanner
                 layoutData={bannerAndMapConnectivity}
@@ -374,18 +385,9 @@ if (isLoading) {
                 setUserCurrentLocation={setUserCurrentLocation}
               />
 
-              <div className="standard-filters">
-                <CustomFacets
-                  layoutData={bannerAndMapConnectivity}
-                  fieldId="name"
-                  displayName=""
-                  language={locale}
-                  handleStatusModal={statusModal}
-                  isDataAvailable={null}
-                />
-              </div>
+            
             </div>
-
+          </div>
             <div
               className={`right-block-locator map-box ${isMapboxOpen}`}
               id="map-box"
@@ -406,14 +408,26 @@ if (isLoading) {
             </div>
 
             <div className="left-block-locator">
+              
+              <div className="standard-filters">
+                <CustomFacets
+                  layoutData={bannerAndMapConnectivity}
+                  fieldId="name"
+                  displayName=""
+                  language={locale}
+                  handleStatusModal={statusModal}
+                  isDataAvailable={null}
+                />
+              </div>
+              <div className={`total-location ${fixed}`}>
+                    <p onClick={() => hideMapInMobile()}>{<ResultsCount />}</p>
+                  </div>
               <PerfectScrollbar
                 className={`${openHeight} result-list`}
                 id="result-list"
               >
                 <div className="px-5 info-window-wrapper">
-                  <div className={`total-location ${fixed}`}>
-                    <p onClick={() => hideMapInMobile()}>{<ResultsCount />}</p>
-                  </div>
+                 
                   {/* {resultCount > 0 ? <></> : <p>{t("No Location found")}</p>} */}
                   <div id="infowindow">
                     {locationResults && locationResults.length > 0 && (

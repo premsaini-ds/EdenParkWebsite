@@ -100,7 +100,7 @@ function InfoWindowComponent({ result, _site }: any) {
     // (id).style.property = new style
   }
 
-
+  console.log("iam king",result);
 
   return (
     <div

@@ -86,8 +86,8 @@ xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" >
 />
 </svg>`;
 export const googleMapsConfig = {
-  centerLatitude:44.500000,
-  centerLongitude:-89.500000,
+  centerLatitude:48.864716,
+  centerLongitude:2.349014,
   googleMapsApiKey: "AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18",
 };
 export const headerHeadingText = "Discover the NEW fragrance: L'Eau Papier..."

@@ -183,7 +183,7 @@ h5 {
 }
 
 .location {
-  @apply flex flex-wrap flex-col sm:flex-row relative w-full  mt-[1.875rem] first:mt-0 border-b border-borderGray border-opacity-50 pb-[1.875rem];
+  @apply flex flex-wrap flex-col sm:flex-row relative w-full first:mt-0 border-b border-borderGray border-opacity-50 pb-[1.875rem];
 }
 .info-window .location {
   @apply pb-2.5;
@@ -498,7 +498,7 @@ flex-wrap flex-row items-center justify-end relative h-[29px]  py-1.5/* px-12*/;
 
 /* left listing */
 .scrollbar-container.result-list {
-  @apply !h-[calc(100vh_-_20rem)] md:!h-[calc(100vh_-_20.375rem)] lg:!h-[calc(140vh_-_21.188rem)] overflow-x-hidden overflow-y-auto border-b border-b-black md:border-b-borderGray pb-5 md:pb-0;
+  @apply !h-[calc(100vh_-_20rem)] md:!h-[calc(100vh_-_20.375rem)] lg:!h-[calc(160vh_-_21.188rem)] overflow-x-hidden overflow-y-auto border-b border-b-black md:border-b-borderGray pb-5 md:pb-0;
 }
 
 .facets-popup .scrollbar-container {
@@ -839,7 +839,7 @@ abbr:where([title]) {
   @apply pb-5 md:pb-0;
 }
 .left-block-locator .total-location p {
-  @apply text-sm font-light text-black uppercase p-5 border-b-2 border-b-black relative cursor-pointer lg:cursor-default after:bg-arrowUpwards after:content-[""] md:after:content-none  after:absolute after:right-5 after:top-2/4 after:-translate-y-2/4 after:w-3 after:h-3 after:bg-no-repeat after:rotate-180;
+  @apply text-[10px] font-light text-black pl-[1.25rem] pr-[1.25rem] pt-[10px] relative cursor-pointer lg:cursor-default after:bg-arrowUpwards after:content-[""] md:after:content-none  after:absolute after:right-5 after:top-2/4 after:-translate-y-2/4 after:w-3 after:h-3 after:bg-no-repeat after:rotate-180;
 }
 
 body.stop-scrolling .left-block-locator .total-location p {
@@ -1386,7 +1386,7 @@ h3.store-heading .store-count {
 }
 
 .search-box {
-  @apply w-full md:w-[26rem] lg:w-[30rem] px-0 pt-5 pb-[1.125rem] float-left;
+  @apply w-full md:w-[26rem] lg:w-[30rem] px-0 pb-[1.125rem] float-left pl-[1.25rem] pr-[1.25rem];
 }
 
 .locator-container {
@@ -4778,8 +4778,6 @@ body.nav-opened
 
 .left-block-locator .total-location {
   text-align: right;
-  margin-bottom: 10px;
-  
 }
 
 
@@ -4789,7 +4787,7 @@ body.nav-opened
 }
 
 .location .Link.consulation {
-  margin: 0 0 1.071429em;
+  /* margin: 0 0 1.071429em; */
   border: 1px solid #020012;
   text-transform: uppercase;
   display: inline-block;
@@ -4847,7 +4845,7 @@ body.nav-opened
 }
 .listingCategorized ul li {
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 30px;
 }
 
 .shopBlack {
@@ -4881,10 +4879,10 @@ body.nav-opened
   display: flex !important;
 }
 .listingCategorized {
-  width: 70%;
+  width: 80%;
 }
 .customFilters{
-  width: 30%;
+  width: 20%;
 }
 
 span.countresultver {
@@ -4906,4 +4904,26 @@ span.countresultver.shopBlack {
   margin: 43px 0;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+button#useLocation {
+  display: flex;
+  gap: 5px;
+  color: #fff;
+  font-size: 15px;
+  vertical-align: sub;
+  float: right;
+}
+
+button#useLocation svg {
+  fill: #fff;
+  height: 21px;
+}
+
+p.findStore {
+  color: #fff;
+  float: left;
+}
+.searchBox-Box .for-allow {
+  color: red;
 }
