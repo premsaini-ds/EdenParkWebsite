@@ -156,7 +156,7 @@ React.useEffect(() => {
           eventName={`getdirections`}
           className="consulation"
           href={`${url}`}
-        >
+        > 
 
           {prop._site?.c_loctorMoreInformation ? prop._site?.c_loctorMoreInformation : t("View Detail")}
         </Link>
