@@ -182,7 +182,7 @@ export function GoogleMaps(props: any) {
     }
 
   useEffect(() => {
-    console.log('userCurrentLocation first map', props.userCurrentLocation);
+    // console.log('userCurrentLocation first map', props.userCurrentLocation);
     if (props.userCurrentLocation && props.userCurrentLocation.latitude && props.userCurrentLocation.longtitude && props.userCurrentLocation != null) {
       const position = {
         lat: parseFloat(props.userCurrentLocation.latitude),

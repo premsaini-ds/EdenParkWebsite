@@ -213,7 +213,7 @@ const SearchLayout = (props: any): JSX.Element => {
       $("body").removeClass("overflow-hidden");
     }, 3100);
   };
-console.log(userCurrentLocation,"userCurrentLocation"); 
+// console.log(userCurrentLocation,"userCurrentLocation"); 
 
           
 

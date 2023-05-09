@@ -27,7 +27,7 @@ type header = {
 
 const Header = (props: header) => {
 
-  console.log("ihhhhhhhh",props?.header?.headerMenuLinks); 
+  // console.log("ihhhhhhhh",props?.header?.headerMenuLinks); 
   // const [isStickyHeader, setIsStickyHeader] = React.useState(false);
   // let [language, setlanguage] = React.useState("");
   // let [country, setCountry] = React.useState("");

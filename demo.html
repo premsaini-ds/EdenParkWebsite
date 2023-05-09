@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function fun() {
+      fetch("https://api.greenmotion.com/api/terms-and-conditions")
+        .then((response) => response.json())
+        .then((data) => {
+          // create an array to store the converted data
+          console.log("data", data);
+          const convertedData = [{}];
+          const transFormData = [{}];
+          data.data.forEach(function (condition, index) {
+            condition.conditions.forEach(function (countids) {
+              countids.country_id = condition.country_id.toString();
+            });
+            convertedData.push(condition);
+          });
+
+          
+          convertedData.forEach(function (conditionss,index) {
+            transFormData.push(conditionss.conditions);
+            console.log("sdfsdfsdfsdfsd", conditionss.conditions); 
+            // transFormData.forEach(function (conditionssss,index) {
+            //     console.log("herevalue", conditionssss); 
+            //     transFormData.push(conditionss); 
+            // })
+           
+                  
+          });
+          
+          console.log("main", convertedData);
+            console.log("transform", transFormData[2]);
+        })
+        .catch((error) => console.error(error));
+    }
+
+    let res = fun();
+  </script>
+  <body></body>
+</html>

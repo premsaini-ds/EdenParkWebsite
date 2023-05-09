@@ -9,6 +9,8 @@
             "c_locatorPageDescription",
             "c_footerLogo",
             "c_footerBottomContent",
+            "c_footerAllMenus",
+            "c_footerPayment",
             "c_copyrightText"
 ],
 "localization": {

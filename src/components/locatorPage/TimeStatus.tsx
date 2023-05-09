@@ -253,7 +253,7 @@ const openClose = {
 export default function TimeStatus(props: any) {
   const { t } = useTranslation();
 
-  console.log("pkkkks",props.hours)
+  // console.log("pkkkks",props.hours)
   
   return (
     <>

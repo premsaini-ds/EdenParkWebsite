@@ -94,7 +94,6 @@ else if(categories == 'Shop'){
 }
 
 
-
 React.useEffect(() => {
   var els = document.querySelectorAll('.countresultver');
   console.log(els,"i am here"); 
