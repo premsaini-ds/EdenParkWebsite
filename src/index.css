@@ -2869,19 +2869,17 @@ header.has-sticky .left-section-links .current-location img {
   display: flex;
   width: 100%;
   font-family: "Calluna";
+  flex-direction: column;
+  margin: 15px 0;
 }
-.footer.content .footer-pages-links {
-  order: 1;
-}
+
 .footer.content .footer-columns .column {
   float: left;
-  padding: 0 10px 0 95px;
-  width: 25%;
+  width: 23%;
 }
 .footer.content .footer-columns p {
-  margin-top: 2.8rem;
   margin-bottom: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 17px;
   font-weight: 500;
   line-height: 17px;
 }
@@ -3430,7 +3428,6 @@ input[type="url"] {
   line-height: 17px;
 }
 .footer.content .footer-columns ul li a:hover {
-  color: #ffffff;
   text-decoration: underline;
 }
 .popup-browser-compat {
@@ -4747,33 +4744,13 @@ body.nav-opened
       font-weight: 500;
   }
 
-  .footer-logo {
-    position: relative;
-    min-height: 1px;
-    padding-left: 0;
-    padding-right: 0;
-    width: 25%;
-    margin: 1.666667em 0;
-    text-align: left;
-}
-.em-client__colophon {
-  width: 50%;
-  margin: 2.692308em 0;
-  position: relative;
-  min-height: 1px;
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 13px;
-  color: black;
+ 
+.em-client__colophon p{
+  font-size: 13px !important;
 }
 .em-copyright {
   position: relative;
-  width: 25%;
-  min-height: 1px;
-  margin: 3.333333em 0;
-  text-align: right;
-  padding: 0;
-  color: #afafaf;
+  width: 80%;
 }
 
 .left-block-locator .total-location {
@@ -4926,4 +4903,23 @@ p.findStore {
 }
 .searchBox-Box .for-allow {
   color: red;
+}
+
+.column4 {
+  width: 30%;
+  float: left;
+}
+
+.copyright-footer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-top: 1px solid gray;
+  margin-top: 100px;
+}
+
+.payment-options {
+  width: 20%;
+  display: flex;
+  gap: 9px;
 }
