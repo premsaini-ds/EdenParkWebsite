@@ -27,19 +27,19 @@ import {
 import FooterAccordian from "../components/layouts/FooterAccordian";
 import Arrow from "../components/locationDetails/Arrow";
 
-export const config: TemplateConfig = {
-  stream: {
-    $id: "not-found-page",
-    fields: ["meta"],
-    localization: {
-      locales: ["en"],
-      primary: false,
-    },
-    filter: {
-      entityIds: ["global-data"],
-    },
-  },
-};
+// export const config: TemplateConfig = {
+//   stream: {
+//     $id: "not-found-page",
+//     fields: ["meta"],
+//     localization: {
+//       locales: ["en"],
+//       primary: false,
+//     },
+//     filter: {
+//       entityIds: ["global-data"],
+//     },
+//   },
+// };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return "404.html";

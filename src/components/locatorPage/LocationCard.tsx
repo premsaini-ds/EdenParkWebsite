@@ -149,7 +149,9 @@ React.useEffect(() => {
               </a>}
 
           <div className="listingButtons">
-                    
+
+         <div className="detail-link">
+                   
         <Link
           data-ya-track="getdirections"
           eventName={`getdirections`}
@@ -159,6 +161,7 @@ React.useEffect(() => {
 
           {prop._site?.c_loctorMoreInformation ? prop._site?.c_loctorMoreInformation : t("View Detail")}
         </Link>
+        </div> 
           {mainPhone ? (
             <div className={"icon-row main-phone "+showPhoneNumber}>
               {" "}

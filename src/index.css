@@ -4819,6 +4819,7 @@ body.nav-opened
 }
 .listingButtons a.Link.consulation {
   width: 40%;
+  padding: 10px;
 }
 .listingCategorized ul li {
   display: inline-block;
