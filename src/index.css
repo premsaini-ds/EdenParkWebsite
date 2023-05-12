@@ -784,7 +784,7 @@ abbr:where([title]) {
   @apply relative mb-[3.75rem] border-b border-b-black after:w-full after:h-[2.5px] after:content-[""] after:absolute after:bottom-[0.313rem] after:bg-black;
 } */
 .boxes .location_details {
-  @apply w-full;
+  @apply w-full flex;
 }
 /* .box{
   @apply px-[0.938rem] sm:px-2.5 lg:px-[0.938rem];
@@ -858,7 +858,7 @@ body.stop-scrolling .left-block-locator .total-location p {
 } */
 
 .address-box {
-  @apply float-left clear-left text-center md:text-left w-full md:w-[60%] lg:w-[60%] xl:w-[calc(100%_-_25rem)] md:pr-[3.75rem];
+  @apply float-left clear-left text-center md:text-left w-full md:w-[60%] lg:w-[60%] xl:w-[calc(100%_-_50rem)] md:pr-[3.75rem];
 }
 
 .address-box .store-name {
@@ -4923,4 +4923,8 @@ p.findStore {
   width: 20%;
   display: flex;
   gap: 9px;
+}
+
+.hide-location.ShowPhone {
+    display: none;
 }

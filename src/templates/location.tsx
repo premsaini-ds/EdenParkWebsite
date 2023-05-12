@@ -437,6 +437,9 @@ const Location: Template<ExternalApiRenderData> = ({
   //   }
   // }
 
+  let header: any = "";
+  header = document?._site && document?._site?.c_headers;
+
   return (
     <>
    
@@ -490,14 +493,7 @@ const Location: Template<ExternalApiRenderData> = ({
       > */}
         {" "}
         {/* <AnalyticsScopeProvider name={""}> */}
-          {/* <Header
-            header={header}
-            locale={document.meta.locale}
-            template="location"
-            path={path}
-            alternateSlug={document.alternateLanguageFields}
-            site={document._site}
-          /> */}
+        <Header header={header} />
 {/* 
           {dm_directoryParents && (
             <>
@@ -513,9 +509,16 @@ const Location: Template<ExternalApiRenderData> = ({
 
 
           {/* <PhotoSlider photos={document.c_topSliderImages ? document.c_topSliderImages : {}} /> */}
+          
+          <div className="container-full-width">
+            <div className="w-full text-center mb-[3.75rem] locatorHeading">
+              <h3 className="sec_heading">
+                  {name}
+              </h3>
+            </div>
+          </div>
 
-
-           {/* <LocationInformation
+       <LocationInformation
         prop={hours ? hours : {}}
         deliveryHours={deliveryHours ? deliveryHours : {}}
         coords={yextDisplayCoordinate ? yextDisplayCoordinate : {}}
@@ -541,7 +544,7 @@ const Location: Template<ExternalApiRenderData> = ({
         //   c_makeAnAppointmentCta ? c_makeAnAppointmentCta : {}
         // }
         // storesType={c_storesType ? c_storesType : ""}
-        _site={document._site} allservices={undefined} serviceheading={undefined} storeheading={undefined} storeProductType={undefined} spokenLanguages={undefined} spokenlanguageTitle={undefined} extratext={undefined} aboutSection={undefined} id={undefined} getDirectionCTA={undefined} makeAnAppointmentCta={undefined} storesType={undefined}          /> */}
+        _site={document._site} allservices={undefined} serviceheading={undefined} storeheading={undefined} storeProductType={undefined} spokenLanguages={undefined} spokenlanguageTitle={undefined} extratext={undefined} aboutSection={undefined} id={undefined} getDirectionCTA={undefined} makeAnAppointmentCta={undefined} storesType={undefined}          />
          {/* {(c_candleOfTheMonth || c_aboutAddress) && <>
             <AboutSection
               informationsectionPart1={c_candleOfTheMonth}
@@ -579,26 +582,11 @@ const Location: Template<ExternalApiRenderData> = ({
                 ></BreadCrumbs>
               </>
             )}
-          </div>
-          <Footer
-            footerData={footer}
-            c_footerpageslinks={c_footerpageslinks}
-            c_footerfollow={c_footerfollow}
-            c_newsletter={c_newsletter}
-            c_footerlinkssecondary={c_footerlinkssecondary}
-            c_footercontact={c_footercontact}
-            c_footerschedule={c_footerschedule}
-            c_popupbrowsercompat={c_popupbrowsercompat}
-            locale={document.meta.locale}
-            template="location"
-            path={path}
-            alternateSlug={document.alternateLanguageFields}
-            site={document._site}
-          />
-
+            </div>*/}
+          <Footer footerData={document._site}/>
 
           {/* Scroll to top button */}
-          {/* <Arrow /> */}
+          <Arrow />
           {/* <div className="page-up on">
             <a className="link-to-top" href="#">
               <span>To top</span>

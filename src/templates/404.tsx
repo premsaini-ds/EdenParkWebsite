@@ -106,14 +106,14 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document }) => {
       >
         {" "}
         <AnalyticsScopeProvider name={"header"}>
-          <Header
+          {/* <Header
             header={header}
             locale={document.meta.locale}
             template="city"
             path={path}
             alternateSlug={document.alternateLanguageFields}
             site={document._site}
-          />
+          /> */}
 
           {/* 404 Main Content */}
           <div className="cms-no-route">
@@ -160,7 +160,7 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document }) => {
             </div>
           </div>
           {/* 404 Bottom icons strip */}
-          <Footer
+          {/* <Footer
             footerData={footer}
             c_footerpageslinks={c_footerpageslinks}
             c_footerfollow={c_footerfollow}
@@ -175,7 +175,7 @@ const FourOhFour: Template<TemplateRenderProps> = ({ document }) => {
             path={path}
             site={undefined}
             alternateSlug={document.alternateLanguageFields}
-          />
+          /> */}
           <Arrow />
         </AnalyticsScopeProvider>
       </AnalyticsProvider>

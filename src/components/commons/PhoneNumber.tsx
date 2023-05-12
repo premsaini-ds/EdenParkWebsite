@@ -19,6 +19,7 @@ const PhoneNumber = (props: any) => {
                 href={`tel:${formattednumber}`}
                 rel="noopener noreferrer"
                 eventName={`phone`}
+                className={"bg-black text-white block px-4 p-2 border"}
             >
                 {formattednumber}
             </Link>
