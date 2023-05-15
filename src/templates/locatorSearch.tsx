@@ -208,6 +208,7 @@ const locatorSearch: Template<TemplateRenderProps> = ({
 
 console.log(header,"iamhere");
   useUpdateTranslation(document._site, meta.locale);
+
   return (
     <>
       <JsonLd<locator>
@@ -257,12 +258,7 @@ console.log(header,"iamhere");
       >
         {" "}
         <AnalyticsScopeProvider name={""}>
-          <Header header={header}         
-          
-            
-          />
-              
-        
+          <Header header={header} />
           <PageLayout>
             <SearchHeadlessProvider
               experienceKey={AnswerExperienceConfig.experienceKey}

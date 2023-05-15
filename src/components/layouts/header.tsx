@@ -20,6 +20,7 @@ type header = {
   // template: any;
   // path: any;
   // alternateSlug: any;
+
  
 };
 
@@ -69,7 +70,7 @@ const Header = (props: header) => {
             </div>
             {/* <div dangerouslySetInnerHTML={{ __html: props?.header?.headerMenuLinks[0] }} /> */}
             
-            <Navbar navItem={props?.header?.headerMenuLinks} path={undefined} template={undefined} alternateSlug={undefined} lastLocale={undefined} addClass={undefined}/>
+            <Navbar navItem={props?.header?.headerMenuLinks} path={undefined} template={undefined} alternateSlug={undefined} lastLocale={undefined} addClass={true} />
                         {/* Site Logo */}
           </div>
         </div>

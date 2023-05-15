@@ -42,11 +42,11 @@ import {
   limit,
   AnswerExperienceConfig,
 } from "../types/constants";
-import { useTranslation } from "react-i18next";
-import { withTranslation } from "react-i18next";
-import "../i18n";
-import AboutSection from "../components/locationDetails/AboutSection";
-import PhotoSlider from "../components/locationDetails/PhotoSlider";
+// import { useTranslation } from "react-i18next";
+// import { withTranslation } from "react-i18next";
+// import "../i18n";
+// import AboutSection from "../components/locationDetails/AboutSection";
+// import PhotoSlider from "../components/locationDetails/PhotoSlider";
 export const config: TemplateConfig = {
   stream: {
     $id: "locations",
@@ -67,6 +67,8 @@ export const config: TemplateConfig = {
        "slug",
       "geocodedCoordinate",
       "additionalHoursText",
+      "c_headerBanner",
+      "c_headerBannerHeading",
       // "dm_directoryParents.name",
       // "dm_directoryParents.slug",
       // "dm_directoryParents.meta.entityType",
@@ -271,6 +273,8 @@ const Location: Template<ExternalApiRenderData> = ({
     deliveryHours,
     additionalHoursText,
     googlePlaceId,
+    c_headerBanner,
+    c_headerBannerHeading,
     // c_allServices,
     // c_serviceHeading,
     // c_productHeading,
@@ -491,7 +495,7 @@ const Location: Template<ExternalApiRenderData> = ({
         enableDebugging={AnalyticsEnableDebugging}
         enableTrackingCookie={AnalyticsEnableTrackingCookie}
       > */}
-        {" "}
+       
         {/* <AnalyticsScopeProvider name={""}> */}
         <Header header={header} />
 {/* 
@@ -512,9 +516,10 @@ const Location: Template<ExternalApiRenderData> = ({
           
           <div className="container-full-width">
             <div className="w-full text-center mb-[3.75rem] locatorHeading">
-              <h3 className="sec_heading">
+             <h3 className="sec_heading">
                   {name}
               </h3>
+              <img src={c_headerBanner.url} alt="image not found" />
             </div>
           </div>
 
@@ -544,7 +549,7 @@ const Location: Template<ExternalApiRenderData> = ({
         //   c_makeAnAppointmentCta ? c_makeAnAppointmentCta : {}
         // }
         // storesType={c_storesType ? c_storesType : ""}
-        _site={document._site} allservices={undefined} serviceheading={undefined} storeheading={undefined} storeProductType={undefined} spokenLanguages={undefined} spokenlanguageTitle={undefined} extratext={undefined} aboutSection={undefined} id={undefined} getDirectionCTA={undefined} makeAnAppointmentCta={undefined} storesType={undefined}          />
+        _site={document?._site} allservices={undefined} serviceheading={undefined} storeheading={undefined} storeProductType={undefined} spokenLanguages={undefined} spokenlanguageTitle={undefined} extratext={undefined} aboutSection={undefined} id={undefined} getDirectionCTA={undefined} makeAnAppointmentCta={undefined} storesType={undefined}          />
          {/* {(c_candleOfTheMonth || c_aboutAddress) && <>
             <AboutSection
               informationsectionPart1={c_candleOfTheMonth}
@@ -553,7 +558,7 @@ const Location: Template<ExternalApiRenderData> = ({
           </>
 
           }
-
+*/}
 
           {externalApiData && (
             <NearByLocation
@@ -570,7 +575,7 @@ const Location: Template<ExternalApiRenderData> = ({
             />
           )}
 
-          <div className="block md:hidden lower-breadcrumb mb-8">
+            {/*<div className="block md:hidden lower-breadcrumb mb-8">
             {dm_directoryParents && (
               <>
                 <BreadCrumbs
@@ -583,7 +588,7 @@ const Location: Template<ExternalApiRenderData> = ({
               </>
             )}
             </div>*/}
-          <Footer footerData={document._site}/>
+          <Footer footerData={document?._site}/>
 
           {/* Scroll to top button */}
           <Arrow />
@@ -598,4 +603,4 @@ const Location: Template<ExternalApiRenderData> = ({
     </>
   );
 };
-export default withTranslation()(Location);
+export default Location;
