@@ -62,11 +62,11 @@ const LocationCard: CardComponent<Location> = (prop): any => {
   if (!prop.result.rawData.slug) {
     url = `${prop.result.id}-${results}`;
     url = slugify(url)
-    url = url + ".html"
+    url = url
   } else {
     url = `${prop.result.rawData.slug.toString()}`;
     url = slugify(url)
-    url = url + ".html"
+    url = url
   }
 
   const { t, i18n } = useTranslation();
@@ -99,7 +99,7 @@ React.useEffect(() => {
   console.log(els,"i am here"); 
   for(var i=0; i < els.length; i++) {
     els[i].index = i;
-    els[i].innerHTML = i+1;  
+    els[i].innerHTML = i+1;   
   }
 })
 

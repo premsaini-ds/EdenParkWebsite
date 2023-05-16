@@ -2,7 +2,7 @@ import * as React from "react";
 import BreadCrumbs from "../components/layouts/BreadCrumbs";
 import LocationInformation from "../components/locationDetails/LocationInformation";
 import NearByLocation from "../components/locationDetails/NearByLocation";
-// import { nearByLocation } from "../types/nearByLocation";
+import { nearByLocation } from "../types/nearByLocation";
 import { JsonLd } from "react-schemaorg";
 import Footer from "../components/layouts/Footer";
 import Header from "../components/layouts/header";
@@ -42,6 +42,9 @@ import {
   limit,
   AnswerExperienceConfig,
 } from "../types/constants";
+import WelcomSection from "../components/locationDetails/WelcomSection";
+import FrenchFlair from "../components/locationDetails/FrenchFlair";
+import Faq from "../components/locationDetails/faq";
 // import { useTranslation } from "react-i18next";
 // import { withTranslation } from "react-i18next";
 // import "../i18n";
@@ -69,6 +72,11 @@ export const config: TemplateConfig = {
       "additionalHoursText",
       "c_headerBanner",
       "c_headerBannerHeading",
+      "c_welcomeSection",
+      "c_frenchFlairDetails",
+      "c_frenchSectionTitle",
+      "c_relatedFAQs.question",
+      "c_relatedFAQs.answer",
       // "dm_directoryParents.name",
       // "dm_directoryParents.slug",
       // "dm_directoryParents.meta.entityType",
@@ -233,25 +241,25 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
       },
     ],
   };
-};
+}; 
 
 /**
 call server side api
  */
-// type ExternalApiData = TemplateProps & {
-//   externalApiData: nearByLocation;
-// };
-// export const transformProps: TransformProps<ExternalApiData> = async (
-//   data: any
-// ) => {
-//   const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${data.document.meta.locale}&location=${data.document.yextDisplayCoordinate.latitude},${data.document.yextDisplayCoordinate.longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
-//   const externalApiData = (await fetch(url).then((res: any) =>
-//     res.json()
-//   )) as nearByLocation;
-//   return { ...data, externalApiData };
-// };
+type ExternalApiData = TemplateProps & {
+  externalApiData: nearByLocation;
+};
+export const transformProps: TransformProps<ExternalApiData> = async (
+  data: any
+) => {
+  const url = `${AnswerExperienceConfig.endpoints.verticalSearch}?experienceKey=${AnswerExperienceConfig.experienceKey}&api_key=${AnswerExperienceConfig.apiKey}&v=20220511&version=${AnswerExperienceConfig.experienceVersion}&locale=${data.document.meta.locale}&location=${data.document.yextDisplayCoordinate.latitude},${data.document.yextDisplayCoordinate.longitude}&verticalKey=${AnswerExperienceConfig.verticalKey}&limit=4&retrieveFacets=true&skipSpellCheck=false&session_id=12727528-aa0b-4558-9d58-12a815eb3761&sessionTrackingEnabled=true&source=STANDARD`;
+  const externalApiData = (await fetch(url).then((res: any) =>
+    res.json()
+  )) as nearByLocation;
+  return { ...data, externalApiData };
+};
 
-// };
+
  type ExternalApiRenderData = TemplateRenderProps & {
   externalApiData: '';
 };
@@ -275,6 +283,10 @@ const Location: Template<ExternalApiRenderData> = ({
     googlePlaceId,
     c_headerBanner,
     c_headerBannerHeading,
+    c_welcomeSection,
+    c_frenchFlairDetails,
+    c_frenchSectionTitle,
+    c_relatedFAQs,
     // c_allServices,
     // c_serviceHeading,
     // c_productHeading,
@@ -514,12 +526,15 @@ const Location: Template<ExternalApiRenderData> = ({
 
           {/* <PhotoSlider photos={document.c_topSliderImages ? document.c_topSliderImages : {}} /> */}
           
-          <div className="container-full-width">
-            <div className="w-full text-center mb-[3.75rem] locatorHeading">
-             <h3 className="sec_heading">
-                  {name}
-              </h3>
-              <img src={c_headerBanner.url} alt="image not found" />
+          <div className="w-full">
+            <div className="text-center locatorHeading">
+             <div className="BannerImage">
+                 <img src={c_headerBanner.url} alt="image not found" />
+              </div>
+              <div className="bannerContent">
+                  <h3 className="sec_heading"> {name} </h3>
+                  <p>{c_headerBannerHeading}</p>
+              </div>
             </div>
           </div>
 
@@ -559,6 +574,26 @@ const Location: Template<ExternalApiRenderData> = ({
 
           }
 */}
+
+     {/* Start Welcome Section component*/}
+      <WelcomSection WelcomeSecData={c_welcomeSection} />
+    {/* End Welcome Section component*/}
+
+    {/* Start French Section component*/}
+      <FrenchFlair frenchFlairDetails={c_frenchFlairDetails} FrenchSectionTitle={c_frenchSectionTitle} />
+    {/* End French Section component*/}
+
+       {c_relatedFAQs ? (
+          <div className="FaqsSection">
+            <Faq
+              prop={c_relatedFAQs}
+              faq_title={'Frequently Asked Questions'}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+
 
           {externalApiData && (
             <NearByLocation
