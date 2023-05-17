@@ -77,9 +77,9 @@ export const config: TemplateConfig = {
       "c_frenchSectionTitle",
       "c_relatedFAQs.question",
       "c_relatedFAQs.answer",
-      // "dm_directoryParents.name",
-      // "dm_directoryParents.slug",
-      // "dm_directoryParents.meta.entityType",
+      "dm_directoryParents.name",
+      "dm_directoryParents.slug",
+      "dm_directoryParents.meta.entityType",
       // "c_enCeMomentSection",
       // "c_aboutSection",
       // "c_productHeading",
@@ -512,7 +512,7 @@ const Location: Template<ExternalApiRenderData> = ({
        
         {/* <AnalyticsScopeProvider name={""}> */}
         <Header header={header} />
-{/* 
+ 
           {dm_directoryParents && (
             <>
               <BreadCrumbs
@@ -523,7 +523,7 @@ const Location: Template<ExternalApiRenderData> = ({
                 locale={document.meta.locale}
               ></BreadCrumbs>
             </>
-          )} */}
+          )} 
 
 
           {/* <PhotoSlider photos={document.c_topSliderImages ? document.c_topSliderImages : {}} /> */}

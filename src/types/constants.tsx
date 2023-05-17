@@ -39,7 +39,7 @@ export const author = "Diptyque Paris";
 export const productionUrl =
   "https://yawningly-defeated-whippet.pgsdemo.com";
 export const favicon =
-  "https://www.diptyqueparis.com/fstrz/r/s/d3oi16fyxsm8ns.cloudfront.net/static/version0.0.0.494/frontend/Diptyque/default/default/Magento_Theme/favicon.ico?frz-v=253";
+  "https://cdn.shopify.com/s/files/1/0605/1338/6692/files/favicon-32x32_32x32.png?v=1639307634";
 
 export const livSiteUrl = "https://www.diptyqueparis.com/";
 export const staticDescription = "Find the nearest diptyque boutique";
@@ -91,4 +91,4 @@ export const googleMapsConfig = {
   googleMapsApiKey: "AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18",
 };
 export const headerHeadingText = "Discover the NEW fragrance: L'Eau Papier..."
-export const SiteUrl = "https://www.diptyqueparis.com/en_eu/"
+export const SiteUrl = "https://main-tightly--lonely--dragon-sbx-pgsdemo-com.sbx.preview.pagescdn.com"

@@ -58,7 +58,7 @@ const BreadCrumbs = (props: data) => {
         });
       }
     }
-
+console.log("premsaini",res.parents);
     if (res.parents) {
       for (let i = 0; i < res.parents.length; i++) {
         if (res.parents[i].meta.entityType.id == "ce_root") {
@@ -66,25 +66,45 @@ const BreadCrumbs = (props: data) => {
           res.parents[i].slug = res.parents[i].slug;
         } else if (res.parents[i].meta.entityType.id == "ce_country") {
           try {
-            res.parents[i].name = regionNames.of(res.parents[i].name);
+                  res.parents[i].name = regionNames.of(res.parents[i].name);
           } catch (error) {
             res.parents[i].name = res.parents[i].name;
           }
-          res.parents[i].slug =
-            res.parents[i - 1].slug + "/" + res.parents[i].slug;
+          res.parents[i].slug =  res.parents[i].slug;
 
           data.push({
-            name: res.parents[i].name,
-            slug: res.parents[i].slug,
+                    name: res.parents[i].name,
+                    slug: res.parents[i].slug,
+
           });
-        } else if (res.parents[i].meta.entityType.id == "ce_city") {
-          res.parents[i].name = res.parents[i].name;
-          res.parents[i].slug =
-            res.parents[i - 1].slug + "/" + res.parents[i].slug;
+        } 
+        else if (res.parents[i].meta.entityType.id == "ce_region") {
+          try {
+                  res.parents[i].name = regionNames.of(res.parents[i].name);
+          } catch (error) {
+            res.parents[i].name = res.parents[i].name;
+          }
+          res.parents[i].slug =   res.parents[i - 1].slug + "/" + res.parents[i].slug;
+
           data.push({
-            name: res.parents[i].name,
-            slug: res.parents[i].slug,
+                    name: res.parents[i].name,
+                    slug: res.parents[i].slug,
+
           });
+        } 
+        else if (res.parents[i].meta.entityType.id == "ce_city") {
+          try {
+            res.parents[i].name = regionNames.of(res.parents[i].name);
+    } catch (error) {
+      res.parents[i].name = res.parents[i].name;
+    }
+    res.parents[i].slug =   res.parents[i - 1].slug + "/" + res.parents[i].slug;
+
+    data.push({
+              name: res.parents[i].name,
+              slug: res.parents[i].slug,
+
+    });
         }
       }
 
@@ -95,12 +115,12 @@ const BreadCrumbs = (props: data) => {
           <li key={crumb.slug}>
             <Link
               href={
-                "/" + props.locale + stagingBaseUrl + "/" + crumb.slug + ".html"
+                  SiteUrl + "/"+crumb.slug+".html"
               }
               rel="noopener noreferrer"
               eventName={"BreadCrumbs" + (index + 1)}
               style={{ color: "#3a356e" }}
-            >
+              >
               {crumb.name}
             </Link>
           </li>
@@ -135,13 +155,16 @@ const BreadCrumbs = (props: data) => {
                       <a href={SiteUrl}>{t("Home")}</a>
                     </li>
                   </SwiperSlide>
-                  <SwiperSlide>
-                    <li>
-                      <a href={
+                  {/* <SwiperSlide> */}
+                    {/* <li> */}
+                      {/* <a href={
                         "/" + props.locale + stagingBaseUrl + "/" + "index.html"
+                      }>{t("Store Finder")}</a> */}
+                       {/* <a href={
+                        SiteUrl+ "/" +"index.html"
                       }>{t("Store Finder")}</a>
-                    </li>
-                  </SwiperSlide>
+                    </li> */}
+                  {/* </SwiperSlide> */}
                   {list && (
                     list
                   )}
