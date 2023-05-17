@@ -204,10 +204,8 @@ const locatorSearch: Template<TemplateRenderProps> = ({
   const { i18n } = useTranslation();
   // i18n.changeLanguage(meta.locale);
   let header: any = "";
-  header = document._site && document._site.c_headers;
-
-console.log(header,"iamhere");
-  useUpdateTranslation(document._site, meta.locale);
+  header = document?._site && document?._site.c_headers;
+  useUpdateTranslation(document?._site, meta?.locale);
 
   return (
     <>
@@ -283,20 +281,8 @@ console.log(header,"iamhere");
           </PageLayout>
           <Footer
             footerData={document._site}
-            // c_footerpageslinks={c_footerpageslinks}
-            // c_footerfollow={c_footerfollow}
-            // c_newsletter={c_newsletter}
-            // c_footerlinkssecondary={c_footerlinkssecondary}
-            // c_footercontact={c_footercontact}
-            // c_footerschedule={c_footerschedule}
-            // c_popupbrowsercompat={c_popupbrowsercompat}
-            // locale={document.locale}
-            // template="locatorSearch"
-            // path={path}
-            // alternateSlug={document.alternateLanguageFields}
-            // site={document._site}
           />
-          <Arrow />
+          {/* <Arrow /> */}
         </AnalyticsScopeProvider>
       </AnalyticsProvider> 
     </>

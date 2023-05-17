@@ -15,11 +15,8 @@ type data = {
   locale: any;
   mainparent: any;
 };
-
 const BreadCrumbs = (props: data) => {
-  console.log(props, 'props')
   const [list, setList] = React.useState(null);
-
   var breadcrumbs;
   var data: any = [];
   React.useEffect(() => {

@@ -246,8 +246,10 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 /**
 call server side api
  */
+
+
 type ExternalApiData = TemplateProps & {
-  externalApiData: nearByLocation;
+  externalApiData: nearByLocation;   
 };
 export const transformProps: TransformProps<ExternalApiData> = async (
   data: any
