@@ -36,8 +36,7 @@ export const stateSavedFilterId = "dm_diptyque-directory_address_region";
 export const rootSavedFilterId = "dm_diptyque-asia-directory";
 export const robotsMetaStatus = "noindex, nofollow";
 export const author = "Diptyque Paris";
-export const productionUrl =
-  "https://yawningly-defeated-whippet.pgsdemo.com";
+export const productionUrl = "https://yawningly-defeated-whippet.pgsdemo.com";
 export const favicon =
   "https://cdn.shopify.com/s/files/1/0605/1338/6692/files/favicon-32x32_32x32.png?v=1639307634";
 
