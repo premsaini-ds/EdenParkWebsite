@@ -18,6 +18,7 @@ import {
   HeadConfig,
   
 } from "@yext/pages";
+import Footer from "../components/layouts/Footer";
 // import PhotoGallery from "../components/commons/PhotoGallery";
 
 
@@ -351,7 +352,8 @@ console.log("hereiamokay",detlslug);
 
   }) : null;
 
-  
+  let header: any = "";
+  header = document?._site && document?._site?.c_headers;
   /***
    * for city when not have region in locations
    * 
@@ -405,13 +407,7 @@ console.log("hereiamokay",detlslug);
     <>
 
 
-      {/* <Header
-        wellLogo={_site.c_wellLogo}
-        headerLinks={_site.c_headerLinks}
-        findPharmacy={_site.c_findAPharmacy}
-        _sitedata={_site}
-      /> */}
-       
+        <Header header={header} />
         {dm_directoryParents ? (
             <>
               <BreadCrumbs
@@ -440,18 +436,7 @@ console.log("hereiamokay",detlslug);
           </ul>
         </div>
       </div>
-      {/* <Footer
-        footerLogo={_site.c_footerLogo}
-        footerLinks={_site.c_footerLinks}
-        footerDescription={_site.c_footerDescription}
-        facebookPageUrl={_site.facebookPageUrl}
-        twitterHandle={_site.twitterHandle}
-        instagramHandle={_site.instagramHandle}
-        linkedInUrl={_site.linkedInUrl}
-        copyrightText={_site.c_copyrightText}
-        footerLogos={_site.c_footerLogos}
-        socialicon={_site.c_socialIcons}
-      /> */}
+      <Footer footerData={document?._site}/>
 
     </>
   );

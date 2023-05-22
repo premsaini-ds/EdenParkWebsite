@@ -27,6 +27,8 @@ import {
 } from "@yext/pages";
 import { svgIcons } from "../svgIcon ";
 import OpenClosedNearby from "../components/locationDetails/OpenCloseNearby";
+import Header from "../components/layouts/header";
+import Footer from "../components/layouts/Footer";
 
 export const config: TemplateConfig = {
   stream: {
@@ -245,6 +247,9 @@ const City: Template<TemplateRenderProps> = ({
   } = document;
   var address;
 
+  let header: any = "";
+  header = document?._site && document?._site?.c_headers;
+
   var sortedChildren = dm_directoryChildren.sort(function (a: any, b: any) {
     var a = a.name;
     var b = b.name;
@@ -272,6 +277,9 @@ const City: Template<TemplateRenderProps> = ({
         origin = entity?.address?.country;
       }
 
+
+
+      
       let key: any = Object.keys(entity?.hours)[0];
       let url = "";
       let countrycode = "";
@@ -308,6 +316,8 @@ const City: Template<TemplateRenderProps> = ({
       // console.log("pksaini");
       // console.log(url);
 
+ 
+
       return (
         <div className="store-box">
           <div className="store-detail">
@@ -333,6 +343,18 @@ const City: Template<TemplateRenderProps> = ({
               </div>
             )}
 
+        {entity.hours ? (
+              <div className="OpenCloseStatus icon-row mb-5">
+                {/* <div className="icon">{svgIcons.openclosestatus}</div> */}
+                <OpenCloseStatus
+                  timezone={"Europe/London"}
+                  hours={entity.hours}
+                ></OpenCloseStatus>
+              </div>
+            ) : (
+              " "
+            )}
+
             {entity.mainPhone && (
               <>
                 <div className="store-phone !mt-0">
@@ -343,17 +365,7 @@ const City: Template<TemplateRenderProps> = ({
               </>
             )}
 
-            {entity.hours ? (
-              <div className="OpenCloseStatus icon-row">
-                {/* <div className="icon">{svgIcons.openclosestatus}</div> */}
-                <OpenCloseStatus
-                  timezone={"Europe/London"}
-                  hours={entity.hours}
-                ></OpenCloseStatus>
-              </div>
-            ) : (
-              " "
-            )}
+          
 
             <div className="buttons">
               {/* <div className="ctaBtn">
@@ -373,7 +385,7 @@ const City: Template<TemplateRenderProps> = ({
               </div> */}
               <div className="ctaBtn">
                 <a
-                  className="button before-icon"
+                  className="button before-icon dmdetailButton"
                   href={`${stagingBaseUrl + url}`}
                 >
                   {svgIcons.viewDetails}
@@ -389,12 +401,7 @@ const City: Template<TemplateRenderProps> = ({
 
   return (
     <>
-      {/* <Header
-        wellLogo={_site.c_wellLogo}
-        headerLinks={_site.c_headerLinks}
-        findPharmacy={_site.c_findAPharmacy}
-        _sitedata={_site}
-      /> */}
+     <Header header={header} />
       <BreadCrumbs
         name={name}
         parents={dm_directoryParents}
@@ -436,18 +443,7 @@ const City: Template<TemplateRenderProps> = ({
         </div>
       </div>
 
-      {/* <Footer
-        footerLogo={_site.c_footerLogo}
-        footerLinks={_site.c_footerLinks}
-        footerDescription={_site.c_footerDescription}
-        facebookPageUrl={_site.facebookPageUrl}
-        twitterHandle={_site.twitterHandle}
-        instagramHandle={_site.instagramHandle}
-        linkedInUrl={_site.linkedInUrl}
-        copyrightText={_site.c_copyrightText}
-        footerLogos={_site.c_footerLogos}
-        socialicon={_site.c_socialIcons}
-      /> */}
+      <Footer footerData={document?._site}/>
     </>
   );
 };

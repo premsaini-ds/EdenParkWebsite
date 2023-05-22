@@ -2,7 +2,7 @@ import * as React from "react";
 import BreadCrumbs from "../components/layouts/BreadCrumbs";
 import hero from "../images/hero.jpg";
 import Header from "../components/layouts/header";
-import Footer from "../components/layouts/footer";
+// import Footer from "../components/layouts/footer";
 
 import { slugify, stagingBaseUrl,favicon } from "../types/constants";
 import "../index.css";
@@ -16,6 +16,7 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
+import Footer from "../components/layouts/Footer";
 // import PhotoGallery from "../components/commons/PhotoGallery";
 
 var currentUrl = "";
@@ -225,15 +226,23 @@ const State: Template<TemplateRenderProps> = ({
     dm_directoryChildren,
     slug
   } = document;
+
+  let header: any = "";
+  header = document?._site && document?._site?.c_headers;
   
 
   const childrenDivs = dm_directoryChildren ? dm_directoryChildren.map((entity: any) => {
     let detlslug;
-    console.log("testurl",entity);
+
+
+
+
     
     if (typeof entity.dm_directoryChildren != "undefined") {
 
 //start code of Get contry,state,city and location slue 
+
+
 
       let detlslug1: any = "";
       detlslug1 = document?.slug?.toString();
@@ -279,16 +288,12 @@ const State: Template<TemplateRenderProps> = ({
       </li>
     )
   }) : null;
-  
+
+
 
   return (
     <>
-        {/* <Header
-        wellLogo={_site.c_wellLogo}
-        headerLinks={_site.c_headerLinks}
-        findPharmacy={_site.c_findAPharmacy}
-        _sitedata={_site}
-      /> */}
+      <Header header={header} />
 
       {dm_directoryParents ? (
             <>
@@ -318,19 +323,7 @@ const State: Template<TemplateRenderProps> = ({
 
         </div>
       </div>
-{/* 
-      <Footer
-       footerLogo={_site.c_footerLogo}
-       footerLinks={_site.c_footerLinks}
-       footerDescription={_site.c_footerDescription}
-       facebookPageUrl={_site.facebookPageUrl}
-       twitterHandle={_site.twitterHandle}
-       instagramHandle={_site.instagramHandle}
-       linkedInUrl={_site.linkedInUrl}
-        copyrightText={_site.c_copyrightText}
-        footerLogos={_site.c_footerLogos}
-        socialicon={_site.c_socialIcons}
-      /> */}
+      <Footer footerData={document?._site}/>
 
     </>
   );

@@ -132,9 +132,9 @@ h5 {
 .button:hover svg {
   @apply fill-white;
 }
-.hero .cta_btn .button {
+/* .hero .cta_btn .button {
   @apply bg-white text-black text-base hover:bg-black hover:text-white leading-8;
-}
+} */
 .store-address .button {
   @apply mt-2.5;
 }
@@ -1145,7 +1145,7 @@ h3.store-heading .store-count {
   @apply text-base font-normal text-black;
 }
 .all-stores .store-box .store-detail .store-phone a {
-  @apply text-sm sm:text-base font-light text-black;
+  @apply text-sm sm:text-base font-light text-white;
 }
 .distance span {
   @apply text-base font-light text-textGray;
@@ -1593,16 +1593,16 @@ h3.store-heading .store-count {
 }
 
 /* banner */
-.hero {
+/* .hero {
   height: 285px;
   @apply relative pt-4 md:pt-8 pb-[34px] md:pb-12 z-0 text-white text-sm lg:text-2xl font-semibold lg:font-normal after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:bg-black after:bg-opacity-60 after:-z-[1];
-}
-.hero .hero-img {
+} */
+/* .hero .hero-img {
   @apply absolute top-0 left-0 w-full h-full object-cover object-left -z-[1];
-}
-.hero p {
+} */
+/* .hero p {
   @apply my-2;
-}
+} */
 footer.footer-sec {
   @apply text-[#fff8f0] mt-8 pb-5 clear-both;
 }
@@ -1993,7 +1993,7 @@ about.css */
   @apply px-2 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4 p-4;
 }
 .storelocation-category a {
-  @apply justify-center flex border border-[#eee] p-4 w-full rounded-xl transition-all transform hover:scale-[1.05] hover:bg-black hover:text-white;
+  @apply justify-center flex border border-[#eee] p-4 w-full rounded-xl transition-all transform hover:scale-[1.05] bg-black text-white;
 }
 .link {
   color: #3a356e;
@@ -4956,4 +4956,60 @@ h3.sec_heading {
 
 .left-img {
   position: relative;
+}
+
+
+.hero:before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 10;
+  background-color: #0000007a;
+  --tw-bg-opacity: 0;
+  --tw-content: "";
+  content: var(--tw-content);
+}
+.hero .heroBanner {
+  height: 18.75rem;
+  -o-object-position: center;
+  object-position: center;
+  width: 100%;
+  object-fit: cover;
+}
+.hero .hero-content {
+  max-width: fit-content;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.hero .hero-content {
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
+}
+.hero .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  width: 100%;
+  --tw-translate-x: -50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-radius: 0.75rem;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-bg-opacity: .8;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgb(15 66 92 / var(--tw-text-opacity));
+}
+
+.hero {
+  position: relative; 
+  z-index: 0;
+  margin-bottom: 2.5rem;
+}
+
+.dmdetailButton{
+  width: 100%;
 }
