@@ -109,7 +109,7 @@ const Footer = (props: footer) => {
           </div>
         </div>
       </footer>
-      <script async src="https://assets.sitescdn.net/ytag/ytag.min.js"></script>
+      
     </>
   );
 };

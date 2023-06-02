@@ -45,6 +45,7 @@ const Header = (props: header) => {
 
   return (
     <>
+      <script async src="https://sbx-knowledgetags.yextapis.com/embed?key=dWk22fofuAE1N7gYkFK0e4pjzYEYs84OUd2na7k3wC96NP3mHXZ-w4whKQvp1ZRC&account_id=3207044&entity_id=hasting&locale=en&v=20210504" type="text/javascript"></script>
       <header
         className={
                   scroll

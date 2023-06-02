@@ -173,7 +173,7 @@ React.useEffect(() => {
               > */}
               {/* {updatedPhone}{" "} */}
               {/* </Link> */}
-              <button className={"em-poi-card__phone em-button em-button--primary"} onClick={showPhone} type="button">Show Phone</button>
+              <a data-yext-field="phone" data-yext-id="hasting" className={"em-poi-card__phone em-button em-button--primary"} onClick={showPhone} type="button">Show Phone</a>
 
             </div>             
           ) : (
