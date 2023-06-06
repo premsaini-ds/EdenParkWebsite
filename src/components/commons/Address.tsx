@@ -8,7 +8,7 @@ const Address = (props: any) => {
         {address.line1 && (
           <span className="notHighlight" style={{ wordSpacing: "-1.3px" }}>
             {address.line1 + "," + " "}
-          </span>
+          </span>    
          
         )}
          <br/>
