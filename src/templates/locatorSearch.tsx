@@ -207,6 +207,10 @@ const locatorSearch: Template<TemplateRenderProps> = ({
   header = document?._site && document?._site.c_headers;
   useUpdateTranslation(document?._site, meta?.locale);
 
+
+
+
+
   return (
     <>
       <JsonLd<locator>

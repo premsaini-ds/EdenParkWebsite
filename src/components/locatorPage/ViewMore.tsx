@@ -9,7 +9,7 @@ interface viewMoreProps {
 
 export default function ViewMore(props: viewMoreProps): JSX.Element | null {
   const { className, idName, buttonLabel } = props;
-  const searchAction = useSearchActions();
+  const searchActions = useSearchActions();
   const offset = useSearchState((state) => state.vertical.offset) || 0;
   const limit =
     useSearchState((state) => state.vertical.limit) ||
@@ -19,17 +19,27 @@ export default function ViewMore(props: viewMoreProps): JSX.Element | null {
     useSearchState(
       (state) => state.vertical?.noResults?.allResultsForVertical.resultsCount
     ) || 0;
+
+
+
   const executeSearchWithNewOffset = (newOffset: number) => {
     let elements = document.querySelectorAll(".result");
     for (let index = 0; index < elements.length; index++) {
       elements[index].classList.remove("selectedLocation");
     }
-    searchAction.setOffset(newOffset);
-    searchAction.executeVerticalQuery();
+    // searchActions.setOffset(newOffset);
+    // searchActions.executeVerticalQuery();
+
+    searchActions.setOffset(0);
+    searchActions.setVerticalLimit(numResults);
+    searchActions.executeVerticalQuery();
+
   };
+
+  
   if (numResults == 0) {
-    numResults = allResultsCountForVertical;
-  }
+      numResults = allResultsCountForVertical;
+    }
 
   const maxPageCount = Math.ceil(numResults / limit);
   if (maxPageCount <= 1) {

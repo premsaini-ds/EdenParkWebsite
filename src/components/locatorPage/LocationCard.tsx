@@ -96,8 +96,8 @@ else if(categories == 'Shop'){
 
 React.useEffect(() => {
   var els = document.querySelectorAll('.countresultver');
-  console.log(els,"i am here"); 
-  for(var i=0; i < els.length; i++) {
+  // console.log(els,"i am here"); 
+  for(var i=0; i < els.length; i++) { 
     els[i].index = i;
     els[i].innerHTML = i+1;   
   }

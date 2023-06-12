@@ -160,7 +160,7 @@ const CustomFacets = ({
       value: "Retailer",
     },
   ];
-  console.log(t("All Diptyque store"), '????')
+  // console.log(t("All Diptyque store"), '????')
 
   return (
     <>
@@ -212,7 +212,7 @@ const CustomFacets = ({
                     type="checkbox"
                     id="see-all-store"
                     checked={filterActive === 'all'}
-                    onChange={() => { consoleLog('onChange') }}
+                    onChange={() => { consoleLog('onChange') }} 
                     className="w-3.5 h-3.5 hidden form-checkbox cursor-pointer border border-gray-300 rounded-sm text-primary focus:ring-primary"
                   />
                   <label htmlFor="see-all-store" id="allresult">

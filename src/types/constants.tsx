@@ -1,4 +1,4 @@
-export const limit = 50;
+export const limit = 1;
 export const radius = 1500;
 export const defaultQuery = "";
 // export const api_base_url = "https://liveapi.yext.com/v2/accounts/me/";

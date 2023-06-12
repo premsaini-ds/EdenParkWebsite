@@ -69,12 +69,12 @@ const NearByLocation = (nearByLoc: props) => {
                     if (!e.slug) {
                       let slugString = e.id + " " + e.name;
                       let slug = slugify(slugString);
-                      url = `${slug}.html`;
+                      url = `${slug}`;
                     } else {
-                      url = `${e.slug.toString()}.html`;
+                      url = `${e.slug.toString()}`;
                     }
 
-                    if (nearByLoc.slug + ".html" != url && e.closed != true) {
+                    if (nearByLoc.slug != url && e.closed != true) {
                       return (
                         <div
                           key={index}
@@ -82,7 +82,7 @@ const NearByLocation = (nearByLoc: props) => {
                         >
                           <h4>
                             <a
-                              href={`/${nearByLoc.locale}${stagingBaseUrl}/${url}`}
+                              href={`${stagingBaseUrl}/${url}`}
                               style={{ color: "#000000" }}
                             >
                               {e.name}
