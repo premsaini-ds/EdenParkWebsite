@@ -6,7 +6,7 @@ type props = {
   informationsectionPart2: any;
 };
 
-const AboutSection = (about: props) => {
+const AboutSection = (about: props) => {   
   return (
     <>
       {/* section address */}
